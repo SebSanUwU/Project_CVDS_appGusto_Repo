@@ -28,4 +28,8 @@ public class Platillo {
         this.ID_restaurante = restaurante;
         this.platillo = platillo;
     }
+
+    public Platillo() {
+
+    }
 }
