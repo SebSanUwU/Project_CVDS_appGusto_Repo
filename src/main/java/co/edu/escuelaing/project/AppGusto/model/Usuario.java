@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 import lombok.Builder;
 @Entity
-@Table(name = "USUARIO")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Usuario {
     @Id
     @Column(name = "ID_USUARIO", length = 100)
@@ -16,6 +16,7 @@ public abstract class Usuario {
     private String nombre;
     @Column(name = "CORREO",length = 70)
     private String correo;
+    @Temporal(TemporalType.DATE)
     @Column(name = "FECHA")
     private Date fecha;
     @Column(name = "NUMERO_INICIO_DE_SESION", length = 9)

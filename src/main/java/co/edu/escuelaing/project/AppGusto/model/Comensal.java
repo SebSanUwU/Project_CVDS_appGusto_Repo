@@ -2,24 +2,27 @@ package co.edu.escuelaing.project.AppGusto.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
 @Table(name = "COMENSAL")
 public class Comensal extends Usuario{
-    @Id
-    @JoinColumn(name = "ID_COMENSAL", referencedColumnName = "ID_USUARIO")
-    @Column(name = "ID_COMENSAL", length = 100)
-    private String ID_comensal;
+
     @Column(name = "PEDIDOS", length = 9)
-    private int pedidos;
+    private int numeroPedidos;
+    @OneToMany(mappedBy = "comensal")
+    private ArrayList<MetodoDePago> metodosDePago;
+    @OneToMany(mappedBy = "ID_usuario")
+    private ArrayList<Pedido> pedidos;
 
     //constructor
 
     public Comensal( String nombre, String correo, Date fecha) {
         super( nombre, correo, fecha, 0);
-        this.ID_comensal = super.getID_usuario();
-        this.pedidos = 0;
+        this.numeroPedidos = 0;
+        this.metodosDePago = new ArrayList<MetodoDePago>();
+        this.pedidos = new ArrayList<Pedido>();
     }
 
     public Comensal() {
@@ -29,12 +32,21 @@ public class Comensal extends Usuario{
     //setters
 
     public void setPedidos(int pedidos) {
-        this.pedidos = pedidos;
+        this.numeroPedidos = pedidos;
     }
 
 
     //getters
-    public int getPedidos() {
+
+    public int getNumeroPedidos() {
+        return numeroPedidos;
+    }
+
+    public ArrayList<MetodoDePago> getMetodosDePago() {
+        return metodosDePago;
+    }
+
+    public ArrayList<Pedido> getPedidos() {
         return pedidos;
     }
 }

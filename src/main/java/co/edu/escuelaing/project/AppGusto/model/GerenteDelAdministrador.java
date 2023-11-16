@@ -6,17 +6,18 @@ import java.util.Date;
 @Entity
 @Table(name = "GERENTE_DEL_ADMINISTRADOR")
 public class GerenteDelAdministrador extends Usuario{
-    @Id
-    @JoinColumn(name = "ID_GERENTE", referencedColumnName = "ID_USUARIO")
-    @Column(name = "ID_GERENTE",length = 100)
-    private String ID_gerente;
-    @ManyToOne
-    @JoinColumn(name = "ID_ADMINISTRADOR", referencedColumnName = "ID_USUARIO")
-    private Usuario ID_administrador;
 
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "ID_ADMINISTRADOR", referencedColumnName = "ID_USUARIO")
+    private Administrador ID_administrador;
+
+    @OneToOne
     @JoinColumn(name = "ID_RESTAURANTE", referencedColumnName = "ID_RESTAURANTE")
     private Restaurante ID_restaurante;
+
+    //construtors
+
+
 
     /**
      *El administrador es el unico que puede crear un gerente.
@@ -26,12 +27,25 @@ public class GerenteDelAdministrador extends Usuario{
      * @param ID_administrador
      * @param ID_restaurante
      */
-    public GerenteDelAdministrador( String nombre, String correo, Date fecha, Usuario ID_administrador, Restaurante ID_restaurante) {
+    public GerenteDelAdministrador( String nombre, String correo, Date fecha, Administrador ID_administrador, Restaurante ID_restaurante) {
         super( nombre, correo, fecha, 0);
         this.ID_administrador = ID_administrador;
         this.ID_restaurante = ID_restaurante;
     }
 
     public GerenteDelAdministrador() {
+    }
+
+
+    // setters
+    // getters
+
+
+    public Administrador get_administrador() {
+        return ID_administrador;
+    }
+
+    public Restaurante get_restaurante() {
+        return ID_restaurante;
     }
 }
