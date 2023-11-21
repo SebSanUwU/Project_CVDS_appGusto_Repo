@@ -1,3 +1,4 @@
 package co.edu.escuelaing.project.AppGusto.controller;
-public class PedidoController {
+
+public class PlatilloController {
 }

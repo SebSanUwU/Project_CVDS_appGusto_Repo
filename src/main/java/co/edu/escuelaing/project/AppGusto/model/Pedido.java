@@ -22,6 +22,8 @@ public class Pedido {
     private int costoTotal;
     @ManyToMany(mappedBy = "pedidos")
     private ArrayList<Platillo> platillos;
+    @Column(name = "DISPONIBLE")
+    private boolean disponible;
 
     public Pedido(){
 
@@ -33,6 +35,10 @@ public class Pedido {
         this.carritoDeCompras = new ArrayList<Platillo>();
         this.ID_usuario = ID_usuario;
         this.costoTotal = costoTotal;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 
     public void setID_pedido(String ID_pedido) {
@@ -51,6 +57,12 @@ public class Pedido {
         this.platillos = platillos;
     }
 
+
+
+
+    public boolean isDisponible() {
+        return disponible;
+    }
     public ArrayList<Platillo> getCarritoDeCompras() {
         return carritoDeCompras;
     }

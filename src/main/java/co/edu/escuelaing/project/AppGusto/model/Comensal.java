@@ -1,9 +1,6 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +8,8 @@ import java.util.Date;
 @Entity
 @Table(name = "COMENSAL")
 public class Comensal extends Usuario {
+    @Transient
+    private ArrayList<Platillo> carritoDeCompras;
 
     @Column(name = "PEDIDOS", length = 9)
     private int numeroPedidos;

@@ -14,7 +14,7 @@ public abstract class Usuario {
     private String ID_usuario;
     @Column(name = "NOMBRE", unique = true, length = 70)
     private String nombre;
-    @Column(name = "CORREO",length = 70)
+    @Column(name = "CORREO", unique = true ,length = 70)
     private String correo;
     @Temporal(TemporalType.DATE)
     @Column(name = "FECHA")
@@ -34,6 +34,10 @@ public abstract class Usuario {
         this.correo = correo;
         this.fecha = fecha;
         this.numero_Inicio_de_sesion = numero_Inicio_de_sesion;
+    }
+    //Methods
+    public void iniciarSesion(String correo, String contraseña){
+
     }
 
 
