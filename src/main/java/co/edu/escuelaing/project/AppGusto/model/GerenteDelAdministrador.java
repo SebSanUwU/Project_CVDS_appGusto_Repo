@@ -5,9 +5,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "GERENTE_DEL_ADMINISTRADOR")
-public class GerenteDelAdministrador extends Usuario{
+public class GerenteDelAdministrador extends Usuario {
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "ID_ADMINISTRADOR", referencedColumnName = "ID_USUARIO")
     private Administrador ID_administrador;
 
@@ -16,6 +16,8 @@ public class GerenteDelAdministrador extends Usuario{
     private Restaurante ID_restaurante;
 
     //construtors
+    public GerenteDelAdministrador() {
+    }
 
 
 
@@ -25,16 +27,15 @@ public class GerenteDelAdministrador extends Usuario{
      * @param correo
      * @param fecha
      * @param ID_administrador
-     * @param ID_restaurante
+     //* @param ID_restaurante
      */
-    public GerenteDelAdministrador( String nombre, String correo, Date fecha, Administrador ID_administrador, Restaurante ID_restaurante) {
+    public GerenteDelAdministrador( String nombre, String correo, Date fecha, Administrador ID_administrador) {
         super( nombre, correo, fecha, 0);
         this.ID_administrador = ID_administrador;
-        this.ID_restaurante = ID_restaurante;
+//        this.ID_restaurante = ID_restaurante;
     }
 
-    public GerenteDelAdministrador() {
-    }
+
 
 
     // setters
@@ -45,7 +46,7 @@ public class GerenteDelAdministrador extends Usuario{
         return ID_administrador;
     }
 
-    public Restaurante get_restaurante() {
-        return ID_restaurante;
-    }
+//    public Restaurante get_restaurante() {
+//        return ID_restaurante;
+//    }
 }

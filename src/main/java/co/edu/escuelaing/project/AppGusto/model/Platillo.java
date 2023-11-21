@@ -21,8 +21,8 @@ public class Platillo {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
-        name = "INGREDIENTE_ESTA_EN", joinColumns = @JoinColumn(name = "PLATILLO", referencedColumnName = "ID_platillo"),
-        inverseJoinColumns = @JoinColumn(name = "INGREDIENTE", referencedColumnName = "ID_ingrediente")
+            name = "INGREDIENTE_ESTA_EN", joinColumns = @JoinColumn(name = "PLATILLO", referencedColumnName = "ID_platillo"),
+            inverseJoinColumns = @JoinColumn(name = "INGREDIENTE", referencedColumnName = "ID_ingrediente")
     )
     private ArrayList<Ingrediente> ingredientes;
 
@@ -33,7 +33,9 @@ public class Platillo {
     )
     private ArrayList<Pedido> pedidos;
 
+    public Platillo() {
 
+    }
 
 
     /**
@@ -49,9 +51,7 @@ public class Platillo {
         this.nombrePlatillo= nombre;
     }
 
-    public Platillo() {
 
-    }
 
     public void setID_platillo(String ID_platillo) {
         this.ID_platillo = ID_platillo;

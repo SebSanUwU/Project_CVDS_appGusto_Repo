@@ -1,12 +1,9 @@
 package co.edu.escuelaing.project.AppGusto.model;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.util.UUID;
-
+@Entity
+@Table(name = "METADO_DE_PAGO")
 public class MetodoDePago {
     @ManyToOne
     @JoinColumn(name =  "ID_comensal")
@@ -14,6 +11,10 @@ public class MetodoDePago {
     @Id
     @Column(name = "ID_METODO_PAGO")
     private String ID_metodoPago;
+
+    public MetodoDePago(){
+
+    }
 
     public MetodoDePago(Comensal comensal) {
         UUID uuid = UUID.randomUUID();

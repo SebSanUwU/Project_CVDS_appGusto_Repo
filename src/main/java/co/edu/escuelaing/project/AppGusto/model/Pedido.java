@@ -8,6 +8,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "PEDIDO")
 public class Pedido {
+    @Transient
     private ArrayList<Platillo> carritoDeCompras;
 
     @Id
@@ -22,7 +23,11 @@ public class Pedido {
     @ManyToMany(mappedBy = "pedidos")
     private ArrayList<Platillo> platillos;
 
-    public Pedido( Usuario ID_usuario, int costoTotal) {
+    public Pedido(){
+
+    }
+
+    public Pedido(Usuario ID_usuario, int costoTotal) {
         UUID uuid = UUID.randomUUID();
         this.ID_pedido = uuid.toString();
         this.carritoDeCompras = new ArrayList<Platillo>();

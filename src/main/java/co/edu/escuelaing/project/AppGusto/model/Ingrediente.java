@@ -1,9 +1,6 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -11,12 +8,18 @@ import java.util.UUID;
 @Entity
 @Table(name = "INGREDIENTE")
 public class Ingrediente {
-
+    @Id
+    @Column(name = "ID_INGREDIENTE")
     private String ID_ingrediente;
+    @Column(name = "NOMBRE")
     private String nombre;
+    @Column(name = "COSTO")
     private int costo;
     @ManyToMany(mappedBy = "ingredientes")
     private ArrayList<Platillo> platillos = new ArrayList<Platillo>();
+
+    public Ingrediente() {
+    }
 
     public Ingrediente(String nombre, int costo) {
         UUID uuid = UUID.randomUUID();

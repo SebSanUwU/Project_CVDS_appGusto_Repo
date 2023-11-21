@@ -1,8 +1,9 @@
 package co.edu.escuelaing.project.AppGusto.model;
-import java.util.ArrayList;
-import java.util.UUID;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.UUID;
 
 @Entity
 @Table(name = "RESTAURANTE")
@@ -23,6 +24,11 @@ public class Restaurante {
     @JoinColumn(name="ID_administrador")
     private Administrador admin;
 
+    @Column(name = "DOCUMENTOS",length = 100)
+    private String documentos;
+    @Column(name = "VERIFICADO",length = 100)
+    private boolean verificado;
+
     @OneToOne
     @JoinColumn(name = "ID_gerente")
     private GerenteDelAdministrador gerente;
@@ -32,20 +38,33 @@ public class Restaurante {
 
 
     //constructors
-
-    public Restaurante(CategoriaEnum ID_categoria, String direccion) {
-        UUID uuid = UUID.randomUUID();
-        this.ID_restaurante = uuid.toString();
-        this.categoria = ID_categoria;
-        this.direccion = direccion;
-    }
-
     public Restaurante() {
 
     }
 
+    public Restaurante(CategoriaEnum ID_categoria, String direccion, String documentos) {
+        UUID uuid = UUID.randomUUID();
+        this.ID_restaurante = uuid.toString();
+        this.categoria = ID_categoria;
+        this.direccion = direccion;
+        this.verificado = false;
+        this.documentos = documentos;
+
+    }
+
+
+
 
     //setters
+
+
+    public void setDocumentos(String documentos) {
+        this.documentos = documentos;
+    }
+
+    public void setVerificado(boolean verificado) {
+        this.verificado = verificado;
+    }
 
     public void setID_restaurante(String ID_restaurante) {
         this.ID_restaurante = ID_restaurante;
@@ -77,6 +96,14 @@ public class Restaurante {
 
     //getters
 
+
+    public String getDocumentos() {
+        return documentos;
+    }
+
+    public boolean isVerificado() {
+        return verificado;
+    }
 
     public String getID_restaurante() {
         return ID_restaurante;

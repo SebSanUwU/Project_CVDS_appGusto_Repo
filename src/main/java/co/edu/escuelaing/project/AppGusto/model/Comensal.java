@@ -1,13 +1,16 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
 @Table(name = "COMENSAL")
-public class Comensal extends Usuario{
+public class Comensal extends Usuario {
 
     @Column(name = "PEDIDOS", length = 9)
     private int numeroPedidos;
@@ -17,6 +20,8 @@ public class Comensal extends Usuario{
     private ArrayList<Pedido> pedidos;
 
     //constructor
+    public Comensal() {
+    }
 
     public Comensal( String nombre, String correo, Date fecha) {
         super( nombre, correo, fecha, 0);
@@ -25,9 +30,7 @@ public class Comensal extends Usuario{
         this.pedidos = new ArrayList<Pedido>();
     }
 
-    public Comensal() {
 
-    }
 
     //setters
 

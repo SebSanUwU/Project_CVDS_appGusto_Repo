@@ -1,13 +1,13 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
-import java.util.UUID;
-import java.util.Date;
 import jakarta.persistence.*;
 
-import java.util.Objects;
-import lombok.Builder;
+import java.util.Date;
+import java.util.UUID;
+//import lombok.Builder;
+
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario {
     @Id
     @Column(name = "ID_USUARIO", length = 100)
@@ -25,7 +25,6 @@ public abstract class Usuario {
 
     //Constructors
     public Usuario() {
-
     }
 
     public Usuario(String nombre, String correo, Date fecha, int numero_Inicio_de_sesion) {
