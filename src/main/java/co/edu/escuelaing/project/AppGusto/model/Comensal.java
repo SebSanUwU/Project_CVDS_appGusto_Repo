@@ -22,8 +22,7 @@ public class Comensal extends Usuario {
     public Comensal() {
     }
 
-    public Comensal( String nombre, String correo, Date fecha) {
-        super( nombre, correo, fecha, 0);
+    public Comensal(String ID_usuario) {
         this.numeroPedidos = 0;
         this.metodosDePago = new ArrayList<MetodoDePago>();
         this.pedidos = new ArrayList<Pedido>();

@@ -1,43 +1,85 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 //import lombok.Builder;
 
+@Builder
+@AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Usuario {
+public class Usuario implements UserDetails {
     @Id
-    @Column(name = "ID_USUARIO", length = 100)
-    private String ID_usuario;
-    @Column(name = "NOMBRE", unique = true, length = 70)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID_usuario", updatable = false, nullable = false)
+    private String  ID_usuario;
+    @Column(name = "NOMBRE", unique = true, nullable = false, length = 70)
     private String nombre;
-    @Column(name = "CORREO", unique = true ,length = 70)
+    @Column(name = "CORREO", unique = true, nullable = false ,length = 70)
     private String correo;
     @Temporal(TemporalType.DATE)
     @Column(name = "FECHA")
     private Date fecha;
     @Column(name = "NUMERO_INICIO_DE_SESION", length = 9)
     private int numero_Inicio_de_sesion;
+    @Column(name = "CONTRASENA")
+    private String contrasena;
 
 
     //Constructors
     public Usuario() {
     }
 
-    public Usuario(String nombre, String correo, Date fecha, int numero_Inicio_de_sesion) {
-        UUID uuid = UUID.randomUUID();
-        this.ID_usuario = uuid.toString();
+    public Usuario(String nombre, String correo, Date fecha, String contrasena) {
+
+        this.ID_usuario =  UUID.randomUUID().toString();
         this.nombre = nombre;
         this.correo = correo;
         this.fecha = fecha;
-        this.numero_Inicio_de_sesion = numero_Inicio_de_sesion;
+        this.numero_Inicio_de_sesion = 1;
+        this.contrasena = contrasena;
     }
     //Methods
-    public void iniciarSesion(String correo, String contraseña){
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
 
+    @Override
+    public String getPassword() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.nombre;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
 
@@ -86,4 +128,5 @@ public abstract class Usuario {
     public int getNumero_Inicio_de_sesion() {
         return numero_Inicio_de_sesion;
     }
+
 }

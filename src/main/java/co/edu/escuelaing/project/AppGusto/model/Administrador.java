@@ -24,8 +24,7 @@ public class Administrador extends Usuario {
 
     }
 
-    public Administrador( String nombre, String correo, Date fecha) {
-        super( nombre, correo, fecha, 0);
+    public Administrador( Date fecha) {
         this.numero_Restaurantes = 0;
         this.restaurantes= new ArrayList<Restaurante>();
         this.gerentes= new ArrayList<GerenteDelAdministrador>();

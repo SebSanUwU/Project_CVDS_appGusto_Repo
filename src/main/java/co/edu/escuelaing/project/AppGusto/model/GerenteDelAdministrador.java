@@ -1,7 +1,6 @@
 package co.edu.escuelaing.project.AppGusto.model;
-import jakarta.persistence.*;
 
-import java.util.Date;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "GERENTE_DEL_ADMINISTRADOR")
@@ -29,8 +28,8 @@ public class GerenteDelAdministrador extends Usuario {
      * @param ID_administrador
      //* @param ID_restaurante
      */
-    public GerenteDelAdministrador( String nombre, String correo, Date fecha, Administrador ID_administrador) {
-        super( nombre, correo, fecha, 0);
+    public GerenteDelAdministrador( Administrador ID_administrador) {
+
         this.ID_administrador = ID_administrador;
 //        this.ID_restaurante = ID_restaurante;
     }
