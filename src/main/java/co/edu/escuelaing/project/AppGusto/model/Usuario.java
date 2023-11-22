@@ -3,6 +3,7 @@ package co.edu.escuelaing.project.AppGusto.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -17,9 +18,10 @@ import java.util.UUID;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID_usuario", updatable = false, nullable = false)
-    private String  ID_usuario;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)", name = "ID_usuario", updatable = false, nullable = false)
+    private UUID  ID_usuario;
     @Column(name = "NOMBRE", unique = true, nullable = false, length = 70)
     private String nombre;
     @Column(name = "CORREO", unique = true, nullable = false ,length = 70)
@@ -39,7 +41,7 @@ public class Usuario implements UserDetails {
 
     public Usuario(String nombre, String correo, Date fecha, String contrasena) {
 
-        this.ID_usuario =  UUID.randomUUID().toString();
+        this.ID_usuario =  UUID.randomUUID();
         this.nombre = nombre;
         this.correo = correo;
         this.fecha = fecha;
@@ -85,7 +87,7 @@ public class Usuario implements UserDetails {
 
     //Setters
 
-    public void setID_usuario(String ID_usuario) {
+    public void setID_usuario(UUID ID_usuario) {
         this.ID_usuario = ID_usuario;
     }
 
@@ -110,7 +112,7 @@ public class Usuario implements UserDetails {
 
 
     public String getID_usuario() {
-        return ID_usuario;
+        return ID_usuario.toString();
     }
 
     public String getNombre() {
