@@ -6,10 +6,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/comensal")
 public class ComensalController {
-    @GetMapping("/home")
+    @GetMapping("/comensal/home")
     public String admin(Model model) {
         return "comensal";
     }
+
+    @GetMapping("/restaurantes")
+    public String bringRestaurant(Model model){
+        return "RestaurantesComensal";
+    }
+
+
 }
