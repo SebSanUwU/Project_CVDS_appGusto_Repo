@@ -35,7 +35,7 @@ public class AplicationConfig {
     }
     @Bean
     public UserDetailsService userDetailsSevirce() {
-        return username -> usuarioRepository.findByNombre(username)
+        return nombre -> usuarioRepository.findByNombre(nombre)
                 .orElseThrow(() -> new UsernameNotFoundException("No se encontro el usuario"));
     }
 }
