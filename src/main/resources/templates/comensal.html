@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Comensal Home</title>
 
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -24,11 +25,11 @@
 <div class="container-fluid p-3 mb-2 text-white" style="background-color: #FE043C;">
     <div class="p-2 text-white text-center h3">Mis restaurantes</div>
 </div>
-<div class="container-fluid mt-4">
+<div class="container-fluid mt-5">
     <a href="#" class="btn d-flex justify-content-center p-0">
-        <div class="card">
-            <img class="card-img-top" src="https://www.eltiempo.com/files/image_1200_680/uploads/2022/11/11/636ec9b036dfd.png" alt="Card image cap">
-            <div class="card-body">
+        <div class="card" style="background-color: #FFF5EC; width: 371px; height: 494px;" >
+            <img class="card-img-top" style="width: auto; height: 340px; object-fit: cover;" src="https://www.eltiempo.com/files/image_1200_680/uploads/2022/11/11/636ec9b036dfd.png" alt="Card image cap">
+            <div class="card-body mt-5">
                 <h5 class="card-title">Central</h5>
                 <p class="card-text">Horario</p>
             </div>
@@ -36,13 +37,49 @@
     </a>
 </div>
 <div class="container d-flex justify-content-center mt-5">
-    <button type="button" class="btn btn-outline-danger btn-light btn-circle">+</button>
+    <button id="miBoton" type="button" class="btn btn-outline-danger btn-light btn-circle">+</button>
 </div>
+
+<nav class="navbar fixed-bottom navbar-expand-lg navbar-light mb-5 mx-auto rounded-pill" style="background-color: #FFF5EC; width: 343px;">
+    <div class="container justify-content-center" style="width: 100%;">
+        <div class="row " style="width: 100%;">
+            <div class="col text-center">
+                <button type="button" class="btn btn-light " style="background-color: #FFF5EC;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                    <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146ZM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5Z"/>
+                </svg>
+                </button>
+            </div>
+            <div class="col text-center">
+                <button type="button" class="btn btn-light" style="background-color: #FFF5EC;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                </svg>
+                </button>
+            </div>
+            <div class="col text-center">
+                <button type="button" class="btn btn-light " style="background-color: #FFF5EC;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</nav>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+    // Asignar un evento de clic al botón
+    document.getElementById("miBoton").addEventListener("click", function() {
+        // Redirigir a la URL deseada
+        window.location.href = "#";
+    });
+</script>
+
 </body>
 </html>
