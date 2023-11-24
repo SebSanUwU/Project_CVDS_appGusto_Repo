@@ -50,4 +50,4 @@ jobs:
           app-name: 'appGustoo'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_74019ACA832C4EC1A7031262D8AA79E6 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8AFD909EB60E49BD80909EA661F0BC2F }}
