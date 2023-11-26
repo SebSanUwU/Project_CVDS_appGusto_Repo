@@ -29,8 +29,7 @@ public class Restaurante {
     @Column(name = "VERIFICADO",length = 100)
     private boolean verificado;
 
-    @OneToOne
-    @JoinColumn(name = "ID_gerente")
+    @OneToOne(mappedBy = "restauranteDelGerente")
     private GerenteDelAdministrador gerente;
     @OneToMany(mappedBy = "ID_restaurante")
     private ArrayList<Platillo> platillos;

@@ -11,8 +11,8 @@ public class GerenteDelAdministrador extends Usuario {
     private Administrador ID_administrador;
 
     @OneToOne
-    @JoinColumn(name = "ID_RESTAURANTE", referencedColumnName = "ID_RESTAURANTE")
-    private Restaurante ID_restaurante;
+    @JoinColumn(name = "RESTAURANTE_DEL_GERENTE", nullable = true)
+    private Restaurante restauranteDelGerente;
 
     //construtors
     public GerenteDelAdministrador() {
@@ -22,16 +22,12 @@ public class GerenteDelAdministrador extends Usuario {
 
     /**
      *El administrador es el unico que puede crear un gerente.
-     * @param nombre
-     * @param correo
-     * @param fecha
      * @param ID_administrador
      //* @param ID_restaurante
      */
-    public GerenteDelAdministrador( Administrador ID_administrador) {
-
+    public GerenteDelAdministrador( Administrador ID_administrador, Restaurante restaurante) {
         this.ID_administrador = ID_administrador;
-//        this.ID_restaurante = ID_restaurante;
+       this.restauranteDelGerente = restaurante;
     }
 
 
@@ -45,7 +41,7 @@ public class GerenteDelAdministrador extends Usuario {
         return ID_administrador;
     }
 
-//    public Restaurante get_restaurante() {
-//        return ID_restaurante;
-//    }
+    public Restaurante get_restaurante() {
+        return restauranteDelGerente;
+    }
 }

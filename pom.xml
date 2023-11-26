@@ -8,11 +8,11 @@
         <version>3.1.5</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.escuelaing</groupId>
-    <artifactId>demo_appGusto</artifactId>
+    <groupId>co.edu.escuelaing.project</groupId>
+    <artifactId>AppGusto</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo_appGusto</name>
-    <description>demo_appGusto</description>
+    <name>AppGusto</name>
+    <description>Project - CVDS</description>
     <properties>
         <java.version>17</java.version>
         <spring-cloud-azure.version>5.7.0</spring-cloud-azure.version>
@@ -77,13 +77,6 @@
             <artifactId>spring-boot-starter-jdbc</artifactId>
 
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
 <!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-docker-compose</artifactId>-->
@@ -105,11 +98,11 @@
             <artifactId>derbytools</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-configuration-processor</artifactId>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -141,10 +134,10 @@
             <artifactId>spring-aop</artifactId>
             <version>6.0.13</version>
         </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.projectlombok</groupId>-->
+<!--            <artifactId>lombok</artifactId>-->
+<!--        </dependency>-->
 
     </dependencies>
     <dependencyManagement>
