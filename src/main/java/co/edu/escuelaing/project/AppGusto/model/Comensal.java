@@ -3,7 +3,6 @@ package co.edu.escuelaing.project.AppGusto.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 @Entity
 @Table(name = "COMENSAL")
@@ -15,7 +14,7 @@ public class Comensal extends Usuario {
     private int numeroPedidos;
     @OneToMany(mappedBy = "comensal")
     private ArrayList<MetodoDePago> metodosDePago;
-    @OneToMany(mappedBy = "ID_usuario")
+    @OneToMany(mappedBy = "id_comensal")
     private ArrayList<Pedido> pedidos;
 
     //constructor

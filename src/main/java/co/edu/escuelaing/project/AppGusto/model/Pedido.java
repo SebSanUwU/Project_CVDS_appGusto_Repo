@@ -14,9 +14,10 @@ public class Pedido {
     @Id
     @Column(name = "ID_PEDIDO",length = 100)
     private String ID_pedido;
+
     @ManyToOne
-    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID_USUARIO")
-    private Usuario ID_usuario;
+    @JoinColumn(name = "ID_USUARIO")
+    private Comensal id_comensal;
 
     @Column(name = "COSTO_TOTAL", length = 20)
     private int costoTotal;
@@ -29,11 +30,11 @@ public class Pedido {
 
     }
 
-    public Pedido(Usuario ID_usuario, int costoTotal) {
+    public Pedido(Comensal comensal, int costoTotal) {
         UUID uuid = UUID.randomUUID();
         this.ID_pedido = uuid.toString();
         this.carritoDeCompras = new ArrayList<Platillo>();
-        this.ID_usuario = ID_usuario;
+        this.id_comensal = comensal;
         this.costoTotal = costoTotal;
     }
 
@@ -45,8 +46,8 @@ public class Pedido {
         this.ID_pedido = ID_pedido;
     }
 
-    public void setID_usuario(Usuario ID_usuario) {
-        this.ID_usuario = ID_usuario;
+    public void setID_usuario(Comensal id_comensal) {
+        this.id_comensal = id_comensal;
     }
 
     public void setCostoTotal(int costoTotal) {
@@ -71,8 +72,8 @@ public class Pedido {
         return ID_pedido;
     }
 
-    public Usuario getID_usuario() {
-        return ID_usuario;
+    public Comensal getID_usuario() {
+        return id_comensal;
     }
 
     public int getCostoTotal() {
