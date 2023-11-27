@@ -16,6 +16,4 @@ public class ComensalController {
     public String bringRestaurant(Model model){
         return "RestaurantesComensal";
     }
-
-
 }
