@@ -18,11 +18,11 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "ID_USUARIO")
     private Comensal id_comensal;
+    @ManyToMany(mappedBy = "pedidos")
+    private ArrayList<Platillo> platillos;
 
     @Column(name = "COSTO_TOTAL", length = 20)
     private int costoTotal;
-    @ManyToMany(mappedBy = "pedidos")
-    private ArrayList<Platillo> platillos;
     @Column(name = "DISPONIBLE")
     private boolean disponible;
 

@@ -15,8 +15,7 @@ public class Administrador extends Usuario {
     private int numero_Restaurantes;
     @OneToMany(mappedBy = "admin")
     private ArrayList<Restaurante> restaurantes;
-    @OneToMany(mappedBy = "ID_administrador")
-    private  ArrayList<GerenteDelAdministrador> gerentes;
+
     @Column(name = "ACTIVO_ADMINISTRADOR", columnDefinition = "BOOLEAN")
     private boolean activoAdministrador;
 
@@ -30,7 +29,6 @@ public class Administrador extends Usuario {
     public void crearAdministrador(){
         this.numero_Restaurantes = 0;
         this.restaurantes= new ArrayList<Restaurante>();
-        this.gerentes= new ArrayList<GerenteDelAdministrador>();
     }
 
 
@@ -62,7 +60,4 @@ public class Administrador extends Usuario {
         return restaurantes;
     }
 
-    public ArrayList<GerenteDelAdministrador> getGerentes() {
-        return gerentes;
-    }
 }

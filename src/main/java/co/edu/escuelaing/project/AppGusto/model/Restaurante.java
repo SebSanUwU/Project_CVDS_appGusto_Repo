@@ -8,32 +8,33 @@ import java.util.UUID;
 @Entity
 @Table(name = "RESTAURANTE")
 public class Restaurante {
+
     @Id
     @Column(name = "ID_RESTAURANTE",length = 100)
     private String ID_restaurante;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "CATEGORIA")
-    private CategoriaEnum categoria;
 
-    @Column(name = "CALIFICACION",length = 6)
-    private float calificacion;
-    @Column(name = "DIRECCION",length = 20)
-    private String direccion;
 
     @ManyToOne
     @JoinColumn(name="ID_administrador")
     private Administrador admin;
 
+    //?
+    @OneToMany(mappedBy = "ID_restaurante")
+    private ArrayList<Platillo> platillos;
+
+    @Column(name = "NOMBRE",length = 50)
+    private String nombre;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "CATEGORIA")
+    private CategoriaEnum categoria;
+    @Column(name = "CALIFICACION",length = 6)
+    private float calificacion;
+    @Column(name = "DIRECCION",length = 20)
+    private String direccion;
     @Column(name = "DOCUMENTOS",length = 100)
     private String documentos;
     @Column(name = "VERIFICADO",length = 100)
     private boolean verificado;
-
-    @OneToOne(mappedBy = "restauranteDelGerente")
-    private GerenteDelAdministrador gerente;
-    @OneToMany(mappedBy = "ID_restaurante")
-    private ArrayList<Platillo> platillos;
-
 
 
     //constructors
@@ -41,21 +42,23 @@ public class Restaurante {
 
     }
 
-    public Restaurante(CategoriaEnum ID_categoria, String direccion, String documentos) {
+    public Restaurante(String nombre, CategoriaEnum ID_categoria, String direccion, String documentos) {
         UUID uuid = UUID.randomUUID();
         this.ID_restaurante = uuid.toString();
         this.categoria = ID_categoria;
         this.direccion = direccion;
         this.verificado = false;
         this.documentos = documentos;
-
+        this.nombre = nombre;
     }
-
-
 
 
     //setters
 
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public void setDocumentos(String documentos) {
         this.documentos = documentos;
@@ -85,16 +88,16 @@ public class Restaurante {
         this.admin = admin;
     }
 
-    public void setGerente(GerenteDelAdministrador gerente) {
-        this.gerente = gerente;
-    }
-
     public void setPlatillos(ArrayList<Platillo> platillos) {
         this.platillos = platillos;
     }
 
     //getters
 
+
+    public String getNombre() {
+        return nombre;
+    }
 
     public String getDocumentos() {
         return documentos;
@@ -124,9 +127,6 @@ public class Restaurante {
         return admin;
     }
 
-    public GerenteDelAdministrador getGerente() {
-        return gerente;
-    }
 
     public ArrayList<Platillo> getPlatillos() {
         return platillos;

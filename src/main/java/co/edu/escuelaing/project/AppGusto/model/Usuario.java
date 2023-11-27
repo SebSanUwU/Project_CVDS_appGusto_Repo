@@ -23,6 +23,8 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Utilizamos GenerationType.IDENTITY para autogenerar un número
     @Column(name = "ID_usuario", updatable = false, nullable = false)
     private Long ID_usuario;
+
+
     @Column(name = "NOMBRE", unique = true, nullable = false, length = 70)
     private String nombre;
     @Column(name = "CORREO", unique = true, nullable = false ,length = 70)

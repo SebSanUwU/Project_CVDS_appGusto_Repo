@@ -10,12 +10,13 @@ public class Comensal extends Usuario {
     @Transient
     private ArrayList<Platillo> carritoDeCompras;
 
-    @Column(name = "PEDIDOS", length = 9)
-    private int numeroPedidos;
     @OneToMany(mappedBy = "comensal")
     private ArrayList<MetodoDePago> metodosDePago;
     @OneToMany(mappedBy = "id_comensal")
     private ArrayList<Pedido> pedidos;
+
+    @Column(name = "PEDIDOS", length = 9)
+    private int numeroPedidos;
     @Column(name = "ACTIVO_COMENSAL",columnDefinition = "BOOLEAN")
     private Boolean activeComensal;
 
