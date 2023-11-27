@@ -9,8 +9,9 @@ import java.util.UUID;
 @Table(name = "INGREDIENTE")
 public class Ingrediente {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_INGREDIENTE")
-    private String ID_ingrediente;
+    private Long ID_ingrediente;
     @Column(name = "NOMBRE")
     private String nombre;
     @Column(name = "COSTO")
@@ -22,13 +23,15 @@ public class Ingrediente {
     }
 
     public Ingrediente(String nombre, int costo) {
-        UUID uuid = UUID.randomUUID();
-        this.ID_ingrediente = uuid.toString();
         this.nombre = nombre;
         this.costo = costo;
     }
     //Setters
 
+
+    public void setID_ingrediente(Long ID_ingrediente) {
+        this.ID_ingrediente = ID_ingrediente;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -42,7 +45,7 @@ public class Ingrediente {
     //Getters
 
 
-    public String getID_ingrediente() {
+    public Long getID_ingrediente() {
         return ID_ingrediente;
     }
 

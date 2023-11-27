@@ -1,11 +1,8 @@
 package co.edu.escuelaing.project.AppGusto.service;
 
-import co.edu.escuelaing.project.AppGusto.model.Administrador;
 import co.edu.escuelaing.project.AppGusto.model.Comensal;
 import co.edu.escuelaing.project.AppGusto.model.Usuario;
-import co.edu.escuelaing.project.AppGusto.repository.AdministradorRepository;
 import co.edu.escuelaing.project.AppGusto.repository.ComensalRepository;
-import co.edu.escuelaing.project.AppGusto.repository.UsuarioRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +10,6 @@ import java.net.HttpURLConnection;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -75,10 +71,10 @@ public class ComensalService {
 
             InputStream inputStream = connection.getInputStream();
 
-            List<Usuario> UsuariosAdministradores = objectMapper.readValue(inputStream, objectMapper.getTypeFactory().constructCollectionType(List.class, Usuario.class));
+            List<Usuario> UsuariosComensales = objectMapper.readValue(inputStream, objectMapper.getTypeFactory().constructCollectionType(List.class, Usuario.class));
 
-            for (Usuario administrador : UsuariosAdministradores) {
-                Comensal aux= ((Comensal)administrador);
+            for (Usuario comensal : UsuariosComensales) {
+                Comensal aux= ((Comensal)comensal);
                 aux.crearComensal();
                 this.saveComensal(aux);
             }
