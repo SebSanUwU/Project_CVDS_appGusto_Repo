@@ -16,6 +16,8 @@ public class Comensal extends Usuario {
     private ArrayList<MetodoDePago> metodosDePago;
     @OneToMany(mappedBy = "id_comensal")
     private ArrayList<Pedido> pedidos;
+    @Column(name = "ACTIVO_COMENSAL",columnDefinition = "BOOLEAN")
+    private Boolean activeComensal;
 
     //constructor
     public Comensal() {
@@ -26,10 +28,22 @@ public class Comensal extends Usuario {
         this.metodosDePago = new ArrayList<MetodoDePago>();
         this.pedidos = new ArrayList<Pedido>();
     }
+    //Methods
+    public void crearComensal(){
+        this.numeroPedidos = 0;
+        this.metodosDePago = new ArrayList<MetodoDePago>();
+        this.pedidos = new ArrayList<Pedido>();
+        this.activeComensal = true;
+    }
 
 
 
     //setters
+
+
+    public void setActiveComensal(Boolean activeComensal) {
+        this.activeComensal = activeComensal;
+    }
 
     public void setPedidos(int pedidos) {
         this.numeroPedidos = pedidos;
@@ -38,6 +52,13 @@ public class Comensal extends Usuario {
 
     //getters
 
+
+    public ArrayList<Platillo> getCarritoDeCompras() {
+        return carritoDeCompras;
+    }
+    public Boolean getActiveComensal() {
+        return activeComensal;
+    }
     public int getNumeroPedidos() {
         return numeroPedidos;
     }

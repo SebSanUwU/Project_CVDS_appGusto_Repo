@@ -14,16 +14,15 @@ import java.util.List;
 import java.util.UUID;
 //import lombok.Builder;
 
-@Builder
-@AllArgsConstructor
+//@Builder
+//@AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "BINARY(16)", name = "ID_usuario", updatable = false, nullable = false)
-    private UUID  ID_usuario;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Utilizamos GenerationType.IDENTITY para autogenerar un número
+    @Column(name = "ID_usuario", updatable = false, nullable = false)
+    private Long ID_usuario;
     @Column(name = "NOMBRE", unique = true, nullable = false, length = 70)
     private String nombre;
     @Column(name = "CORREO", unique = true, nullable = false ,length = 70)
@@ -35,6 +34,8 @@ public class Usuario {
     private int numero_Inicio_de_sesion;
     @Column(name = "CONTRASENA")
     private String contrasena;
+    @Column(name="ACTIVO", columnDefinition = "BOOLEAN")
+    private boolean activo;
 
 
     //Constructors
@@ -42,13 +43,12 @@ public class Usuario {
     }
 
     public Usuario(String nombre, String correo, Date fecha, String contrasena) {
-
-        this.ID_usuario =  UUID.randomUUID();
         this.nombre = nombre;
         this.correo = correo;
         this.fecha = fecha;
         this.numero_Inicio_de_sesion = 1;
         this.contrasena = contrasena;
+        this.activo = true;
     }
     //Methods
 //    @Override
@@ -89,7 +89,12 @@ public class Usuario {
 
     //Setters
 
-    public void setID_usuario(UUID ID_usuario) {
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    public void setID_usuario(Long ID_usuario) {
         this.ID_usuario = ID_usuario;
     }
 
@@ -113,6 +118,9 @@ public class Usuario {
     //Getters
 
 
+    public boolean isActivo() {
+        return activo;
+    }
     public String getID_usuario() {
         return ID_usuario.toString();
     }
