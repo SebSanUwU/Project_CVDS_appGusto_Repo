@@ -10,7 +10,7 @@ import java.util.UUID;
 public class Restaurante {
     @Id
     @Column(name = "ID_RESTAURANTE",length = 100)
-    private String ID_restaurante;
+    private Long ID_restaurante;
     @Enumerated(EnumType.STRING)
     @Column(name = "CATEGORIA")
     private CategoriaEnum categoria;
@@ -29,10 +29,16 @@ public class Restaurante {
     @Column(name = "VERIFICADO",length = 100)
     private boolean verificado;
 
+    @Column(name="NOMBRE_MARCA" )
+    private String nombreMarca;
+    @Column(name="NOMBRE_LEGAL" )
+    private String nombreLegal;
+
     @OneToOne(mappedBy = "restauranteDelGerente")
     private GerenteDelAdministrador gerente;
     @OneToMany(mappedBy = "ID_restaurante")
     private ArrayList<Platillo> platillos;
+
 
 
 
@@ -41,21 +47,48 @@ public class Restaurante {
 
     }
 
-    public Restaurante(CategoriaEnum ID_categoria, String direccion, String documentos) {
-        UUID uuid = UUID.randomUUID();
-        this.ID_restaurante = uuid.toString();
+    public Restaurante(CategoriaEnum ID_categoria,
+                       String direccion,
+                       String documentos,
+                       String nombreMarca, String nombreLegal) {
         this.categoria = ID_categoria;
         this.direccion = direccion;
         this.verificado = false;
         this.documentos = documentos;
+        this.platillos = new ArrayList<Platillo>();
+        this.nombreMarca = nombreMarca;
+        this.nombreLegal = nombreLegal;
 
     }
 
+    public Restaurante(CategoriaEnum categoria,
+                       String direccion,
+                       Administrador admin,
+                       String documentos,
+                       GerenteDelAdministrador gerente,
+                       String nombreMarca, String nombreLegal) {
+        this.categoria = categoria;
+        this.direccion = direccion;
+        this.admin = admin;
+        this.documentos = documentos;
+        this.verificado = false;
+        this.gerente = gerente;
+        this.platillos = new ArrayList<Platillo>();
+        this.nombreMarca = nombreMarca;
+        this.nombreLegal = nombreLegal;
 
-
+    }
 
     //setters
 
+
+    public void setNombreMarca(String nombreMarca) {
+        this.nombreMarca = nombreMarca;
+    }
+
+    public void setNombreLegal(String nombreLegal) {
+        this.nombreLegal = nombreLegal;
+    }
 
     public void setDocumentos(String documentos) {
         this.documentos = documentos;
@@ -65,7 +98,7 @@ public class Restaurante {
         this.verificado = verificado;
     }
 
-    public void setID_restaurante(String ID_restaurante) {
+    public void setID_restaurante(Long ID_restaurante) {
         this.ID_restaurante = ID_restaurante;
     }
 
@@ -96,6 +129,14 @@ public class Restaurante {
     //getters
 
 
+    public String getNombreMarca() {
+        return nombreMarca;
+    }
+
+    public String getNombreLegal() {
+        return nombreLegal;
+    }
+
     public String getDocumentos() {
         return documentos;
     }
@@ -104,7 +145,7 @@ public class Restaurante {
         return verificado;
     }
 
-    public String getID_restaurante() {
+    public Long getID_restaurante() {
         return ID_restaurante;
     }
 

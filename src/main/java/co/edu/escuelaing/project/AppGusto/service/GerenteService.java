@@ -25,21 +25,54 @@ import java.net.URL;
 @Service
 public class GerenteService {
     private final GerenteRepository gerenteRepository;
+    private  final UsuarioService usuarioService;
 
     @Autowired
-    public GerenteService( GerenteRepository gerenteRepository) {
+    public GerenteService( GerenteRepository gerenteRepository,
+                           UsuarioService usuarioService) {
         this.gerenteRepository = gerenteRepository;
+        this.usuarioService = usuarioService;
     }
 
-    public boolean createGerente(Administrador ID_administrador, Restaurante restaurante, String nombre, String correo, Date fecha, String contrasena){
+    public boolean createGerente(Administrador ID_administrador, Restaurante restaurante, String nombres,
+                                 String apellidos,
+                                 String username,
+                                 String correo,
+                                 Date fecha, String contrasena){
         try {
-            GerenteDelAdministrador gerente = new GerenteDelAdministrador(ID_administrador, restaurante, nombre, correo, fecha, contrasena);
+            GerenteDelAdministrador gerente = new GerenteDelAdministrador(ID_administrador,
+                    restaurante,
+                    nombres,
+                    apellidos,
+                    username,
+                    correo,
+                    fecha, contrasena);
             this.saveGerente(gerente);
             return true;
         }catch (Exception e){
             return false;
         }
     }
+    public boolean createGerente(Administrador ID_administrador, Restaurante restaurante, String username){
+        try {
+            Usuario user = usuarioService.getUserByUsername(username).get();
+
+            GerenteDelAdministrador gerente = new GerenteDelAdministrador(user, ID_administrador,
+                    restaurante);
+            this.saveGerente(gerente);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public  GerenteDelAdministrador getGerenteByUsername(String username){
+        Usuario user = usuarioService.getUserByUsername(username).get();
+        GerenteDelAdministrador gerente = user instanceof GerenteDelAdministrador ? (GerenteDelAdministrador)user : null;
+
+        return gerente;
+    }
+
+
 
     public List<GerenteDelAdministrador> getGerentes(){
         return gerenteRepository.findAll();

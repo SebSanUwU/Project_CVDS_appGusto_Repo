@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.scheduling.support.SimpleTriggerContext;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +24,12 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Utilizamos GenerationType.IDENTITY para autogenerar un número
     @Column(name = "ID_usuario", updatable = false, nullable = false)
     private Long ID_usuario;
-    @Column(name = "NOMBRE", unique = true, nullable = false, length = 70)
-    private String nombre;
+    @Column(name = "USERNAME", unique = true, nullable = false, length = 70)
+    private String username;
+    @Column(name = "NOMBRES")
+    private String nombres;
+    @Column(name = "APELLIODOS")
+    private String apellidos;
     @Column(name = "CORREO", unique = true, nullable = false ,length = 70)
     private String correo;
     @Temporal(TemporalType.DATE)
@@ -42,8 +47,14 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String correo, Date fecha, String contrasena) {
-        this.nombre = nombre;
+    public Usuario(String nombres,
+                   String apellidos,
+                   String username,
+                   String correo,
+                   Date fecha, String contrasena) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.username = username;
         this.correo = correo;
         this.fecha = fecha;
         this.numero_Inicio_de_sesion = 1;
@@ -90,6 +101,22 @@ public class Usuario {
     //Setters
 
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
@@ -98,9 +125,6 @@ public class Usuario {
         this.ID_usuario = ID_usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
 
     public void setCorreo(String correo) {
         this.correo = correo;
@@ -118,16 +142,25 @@ public class Usuario {
     //Getters
 
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
     public boolean isActivo() {
         return activo;
     }
-    public String getID_usuario() {
-        return ID_usuario.toString();
+    public Long getID_usuario() {
+        return ID_usuario;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
 
     public String getCorreo() {
         return correo;

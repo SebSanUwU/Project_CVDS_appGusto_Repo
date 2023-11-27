@@ -27,8 +27,18 @@ public class GerenteDelAdministrador extends Usuario {
      *
      * @param ID_administrador //* @param ID_restaurante
      */
-    public GerenteDelAdministrador(Administrador ID_administrador, Restaurante restaurante, String nombre, String correo, Date fecha, String contrasena) {
-        super( nombre,  correo,  fecha,  contrasena);
+    public GerenteDelAdministrador(Administrador ID_administrador, Restaurante restaurante, String nombres,
+                                   String apellidos,
+                                   String username,
+                                   String correo,
+                                   Date fecha, String contrasena) {
+        super( nombres,apellidos,username,  correo,  fecha,  contrasena);
+        this.ID_administrador = ID_administrador;
+        this.restauranteDelGerente = restaurante;
+    }
+
+    public GerenteDelAdministrador(Usuario usuario, Administrador ID_administrador, Restaurante restaurante) {
+        this.setID_usuario(usuario.getID_usuario());
         this.ID_administrador = ID_administrador;
         this.restauranteDelGerente = restaurante;
     }

@@ -27,16 +27,26 @@ public class Administrador extends Usuario {
 
 
     //methods
-    public void crearAdministrador(){
+    public Administrador(Usuario usuario){
+        this.setID_usuario(usuario.getID_usuario());
         this.numero_Restaurantes = 0;
         this.restaurantes= new ArrayList<Restaurante>();
         this.gerentes= new ArrayList<GerenteDelAdministrador>();
+        this.setActivoAdministrador(true);
     }
 
 
 
     //setters
 
+
+    public void setRestaurantes(ArrayList<Restaurante> restaurantes) {
+        this.restaurantes = restaurantes;
+    }
+
+    public void setGerentes(ArrayList<GerenteDelAdministrador> gerentes) {
+        this.gerentes = gerentes;
+    }
 
     public void setActivoAdministrador(boolean activeAdministrador) {
         this.activoAdministrador = activeAdministrador;
@@ -49,6 +59,10 @@ public class Administrador extends Usuario {
 
     //getters
 
+
+    public boolean isActivoAdministrador() {
+        return activoAdministrador;
+    }
 
     public boolean isActiveAdministrador() {
         return activoAdministrador;
