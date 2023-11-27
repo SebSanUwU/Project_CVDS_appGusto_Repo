@@ -50,4 +50,4 @@ jobs:
           app-name: 'AppGusto-Proof-Sever'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A1F04EFF8B6B475DA83872E70356A1F5 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B1AD0C6C62444790830B926E86C6FCE4 }}
