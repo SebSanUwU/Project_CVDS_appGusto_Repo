@@ -8,6 +8,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "RESTAURANTE")
 public class Restaurante {
+
     @Id
     @Column(name = "ID_RESTAURANTE",length = 100)
     private Long ID_restaurante;
@@ -15,15 +16,20 @@ public class Restaurante {
     @Column(name = "CATEGORIA")
     private CategoriaEnum categoria;
 
-    @Column(name = "CALIFICACION",length = 6)
-    private float calificacion;
-    @Column(name = "DIRECCION",length = 20)
-    private String direccion;
 
     @ManyToOne
     @JoinColumn(name="ID_administrador")
     private Administrador admin;
 
+    @OneToMany(mappedBy = "ID_restaurante")
+    private ArrayList<Platillo> platillos;
+
+    @Column(name = "NOMBRE",length = 50)
+    private String nombre;
+    @Column(name = "CALIFICACION",length = 6)
+    private float calificacion;
+    @Column(name = "DIRECCION",length = 20)
+    private String direccion;
     @Column(name = "DOCUMENTOS",length = 100)
     private String documentos;
     @Column(name = "VERIFICADO",length = 100)
@@ -36,9 +42,6 @@ public class Restaurante {
 
     @OneToOne(mappedBy = "restauranteDelGerente")
     private GerenteDelAdministrador gerente;
-    @OneToMany(mappedBy = "ID_restaurante")
-    private ArrayList<Platillo> platillos;
-
 
 
 
@@ -46,6 +49,7 @@ public class Restaurante {
     public Restaurante() {
 
     }
+
 
     public Restaurante(CategoriaEnum ID_categoria,
                        String direccion,
@@ -58,6 +62,7 @@ public class Restaurante {
         this.platillos = new ArrayList<Platillo>();
         this.nombreMarca = nombreMarca;
         this.nombreLegal = nombreLegal;
+
 
     }
 
@@ -77,6 +82,7 @@ public class Restaurante {
         this.nombreMarca = nombreMarca;
         this.nombreLegal = nombreLegal;
 
+
     }
 
     //setters
@@ -88,6 +94,7 @@ public class Restaurante {
 
     public void setNombreLegal(String nombreLegal) {
         this.nombreLegal = nombreLegal;
+
     }
 
     public void setDocumentos(String documentos) {
@@ -118,16 +125,11 @@ public class Restaurante {
         this.admin = admin;
     }
 
-    public void setGerente(GerenteDelAdministrador gerente) {
-        this.gerente = gerente;
-    }
-
     public void setPlatillos(ArrayList<Platillo> platillos) {
         this.platillos = platillos;
     }
 
     //getters
-
 
     public String getNombreMarca() {
         return nombreMarca;
@@ -165,9 +167,6 @@ public class Restaurante {
         return admin;
     }
 
-    public GerenteDelAdministrador getGerente() {
-        return gerente;
-    }
 
     public ArrayList<Platillo> getPlatillos() {
         return platillos;

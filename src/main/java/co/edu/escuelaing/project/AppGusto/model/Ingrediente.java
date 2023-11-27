@@ -12,12 +12,15 @@ public class Ingrediente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_INGREDIENTE")
     private Long ID_ingrediente;
+
+    @ManyToMany(mappedBy = "ingredientes")
+    private ArrayList<Platillo> platillos = new ArrayList<Platillo>();
+
     @Column(name = "NOMBRE")
     private String nombre;
     @Column(name = "COSTO")
     private int costo;
-    @ManyToMany(mappedBy = "ingredientes")
-    private ArrayList<Platillo> platillos = new ArrayList<Platillo>();
+
 
     public Ingrediente() {
     }

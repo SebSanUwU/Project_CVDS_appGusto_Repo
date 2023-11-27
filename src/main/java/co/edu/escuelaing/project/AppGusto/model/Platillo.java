@@ -11,13 +11,11 @@ public class Platillo {
     @Id
     @Column(name = "ID_PLATILLO")
     private String ID_platillo;
+
+
     @ManyToOne
     @JoinColumn(name= "RESTAURANTE")
     private Restaurante ID_restaurante;
-    @Column(name = "COSTO_PLATILLO", length = 9)
-    private int costoPlatillo;
-    @Column(name = "NOMBRE", length = 20)
-    private String nombrePlatillo;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
@@ -33,10 +31,15 @@ public class Platillo {
     )
     private ArrayList<Pedido> pedidos;
 
+
+    @Column(name = "COSTO_PLATILLO", length = 9)
+    private int costoPlatillo;
+    @Column(name = "NOMBRE", length = 20)
+    private String nombrePlatillo;
+
     public Platillo() {
 
     }
-
 
     /**
      * Solo un restaurante puede crear un platillo
