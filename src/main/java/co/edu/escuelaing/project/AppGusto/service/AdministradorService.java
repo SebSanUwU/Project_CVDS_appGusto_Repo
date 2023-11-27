@@ -19,16 +19,103 @@ import java.net.URL;
 @Service
 public class AdministradorService {
     private final AdministradorRepository administradorRepository;
+    private final RestauranteService restauranteService;
+    private final GerenteService gerenteService;
+    private  final UsuarioService usuarioService;
+
 
     @Autowired
-    public AdministradorService( AdministradorRepository administradorRepository) {
+    public AdministradorService( AdministradorRepository administradorRepository,
+                                 RestauranteService restauranteService,
+                                 GerenteService gerenteService,
+                                 UsuarioService usuarioService
+                                 ) {
         this.administradorRepository = administradorRepository;
+        this.restauranteService = restauranteService;
+        this.gerenteService = gerenteService;
+        this.usuarioService = usuarioService;
+
     }
     public void createAdmin(Usuario usuario){
-        Administrador admin = (Administrador)usuario;
-        admin.crearAdministrador();
+        Administrador admin = new Administrador(usuario);
         administradorRepository.save(admin);
     }
+    public void crearRestaurante(){
+
+    }
+    public boolean createGerente(Administrador ID_administrador, Restaurante restaurante, String nombres,
+                                 String apellidos,
+                                 String username,
+                                 String correo,
+                                 Date fecha, String contrasena){
+        try {
+            GerenteDelAdministrador gerente = new GerenteDelAdministrador(ID_administrador,
+                    restaurante,
+                    nombres,
+                    apellidos,
+                    username,
+                    correo,
+                    fecha, contrasena);
+            gerenteService.saveGerente(gerente);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public boolean createGerente(Administrador ID_administrador,
+                                 Restaurante restaurante, String username){
+        try {
+            Usuario user = usuarioService.getUserByUsername(username).get();
+
+            GerenteDelAdministrador gerente = new GerenteDelAdministrador(user, ID_administrador,
+                    restaurante);
+            gerenteService.saveGerente(gerente);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+    public boolean createGerente(CategoriaEnum categoria,
+                                 String direccion,
+                                 Administrador admin,
+                                 String documentos,
+                                 GerenteDelAdministrador gerente,
+                                 String nombreMarca, String nombreLegal){
+        try {
+             restauranteService.crearRestauranteConectado( categoria,
+                     direccion,
+                     admin,
+                     documentos,
+                     gerente,
+                     nombreMarca,  nombreLegal);
+            return true;
+
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    public boolean createGerente(CategoriaEnum categoria,
+                                 String direccion,
+                                 Administrador admin,
+                                 String documentos,
+                                 String gerenteUsername,
+                                 String nombreMarca, String nombreLegal){
+        try {
+            GerenteDelAdministrador gerente = gerenteService.getGerenteByUsername(gerenteUsername);
+            restauranteService.crearRestauranteConectado( categoria,
+                    direccion,
+                    admin,
+                    documentos,
+                    gerente,
+                    nombreMarca,  nombreLegal);
+            return true;
+
+        }catch (Exception e){
+            return false;
+        }
+    }
+
 
     public List<Administrador> getAdministradores(){
         return administradorRepository.findAll();
@@ -73,9 +160,9 @@ public class AdministradorService {
 
             List<Usuario> UsuariosAdministradores = objectMapper.readValue(inputStream, objectMapper.getTypeFactory().constructCollectionType(List.class, Usuario.class));
 
-            for (Usuario administrador : UsuariosAdministradores) {
-                Administrador aux= ((Administrador)administrador);
-                aux.crearAdministrador();
+            for (Usuario usuario : UsuariosAdministradores) {
+                usuarioService.saveUsuario(usuario);
+                Administrador aux= new Administrador(usuario);
                 this.saveAdministrador(aux);
             }
             connection.disconnect();

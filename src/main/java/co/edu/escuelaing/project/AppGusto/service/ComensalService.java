@@ -19,14 +19,16 @@ import java.net.URL;
 @Service
 public class ComensalService {
     private final ComensalRepository comensalRepository;
+    private final UsuarioService usuarioService;
 
     @Autowired
-    public ComensalService( ComensalRepository comensalRepository) {
+    public ComensalService( ComensalRepository comensalRepository,
+                            UsuarioService usuarioService) {
         this.comensalRepository = comensalRepository;
+        this.usuarioService = usuarioService;
     }
-    public void createAdmin(Usuario usuario){
-        Comensal comensal = (Comensal)usuario;
-        comensal.crearComensal();
+    public void crearComensal(Usuario usuario){
+        Comensal comensal = new Comensal(usuario);
         comensalRepository.save(comensal);
     }
 
@@ -74,8 +76,8 @@ public class ComensalService {
             List<Usuario> UsuariosComensales = objectMapper.readValue(inputStream, objectMapper.getTypeFactory().constructCollectionType(List.class, Usuario.class));
 
             for (Usuario comensal : UsuariosComensales) {
-                Comensal aux= ((Comensal)comensal);
-                aux.crearComensal();
+                usuarioService.saveUsuario(comensal);
+                Comensal aux= new Comensal(comensal);
                 this.saveComensal(aux);
             }
             connection.disconnect();

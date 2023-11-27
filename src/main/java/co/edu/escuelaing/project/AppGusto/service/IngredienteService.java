@@ -48,7 +48,7 @@ public class IngredienteService {
         }
     }
 
-    public void fillEmployees(){
+    public void fillIngredientes(){
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {

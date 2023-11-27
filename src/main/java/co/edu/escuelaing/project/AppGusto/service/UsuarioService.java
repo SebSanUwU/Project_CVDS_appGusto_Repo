@@ -11,6 +11,7 @@ import org.yaml.snakeyaml.tokens.Token;
 
 import java.net.HttpURLConnection;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,8 +29,16 @@ public class UsuarioService {
     public UsuarioService(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
     }
-    public void createUser(){
-        Usuario usuario = new Usuario();
+    public void createUser(String nombres,
+                           String apellidos,
+                           String username,
+                           String correo,
+                           Date fecha, String contrasena){
+        Usuario usuario = new Usuario( nombres,
+                 apellidos,
+                 username,
+                 correo,
+                 fecha,  contrasena);
         usuarioRepository.save(usuario);
     }
 
@@ -38,14 +47,17 @@ public class UsuarioService {
     }
 
     public Optional<Usuario> getUsuarioById(long id){
-        //cuidadao
         return usuarioRepository.findById(id);
+    }
+
+    public Optional<Usuario> getUserByUsername(String username){
+        return  usuarioRepository.findByUsername(username);
     }
     public void saveUsuario(Usuario e){
         usuarioRepository.save(e);
     }
 
-    public boolean deleteEmployee(long id){
+    public boolean deleteUsuario(long id){
         try{
             Optional<Usuario> usuario= this.getUsuarioById(id);
             usuarioRepository.delete(usuario.get());
