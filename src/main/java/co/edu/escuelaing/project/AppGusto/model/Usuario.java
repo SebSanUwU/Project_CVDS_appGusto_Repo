@@ -9,10 +9,7 @@ import org.springframework.scheduling.support.SimpleTriggerContext;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 //import lombok.Builder;
 
 //@Builder
@@ -30,7 +27,7 @@ public class Usuario {
     private String nombres;
     @Column(name = "APELLIODOS")
     private String apellidos;
-    @Column(name = "CORREO", unique = true, nullable = false ,length = 70)
+    @Column(name = "CORREO", unique = true, nullable = false, length = 70)
     private String correo;
     @Temporal(TemporalType.DATE)
     @Column(name = "FECHA")
@@ -39,8 +36,15 @@ public class Usuario {
     private int numero_Inicio_de_sesion;
     @Column(name = "CONTRASENA")
     private String contrasena;
-    @Column(name="ACTIVO", columnDefinition = "BOOLEAN")
+    @Column(name = "ACTIVO", columnDefinition = "BOOLEAN")
     private boolean activo;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID_usuario")},
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
+    private List<Role> roles = new ArrayList<>();
 
 
     //Constructors
@@ -48,6 +52,20 @@ public class Usuario {
     }
 
     public Usuario(String nombres,
+                   String apellidos,
+                   String username,
+                   String correo,
+                   Date fecha, String contrasena) {
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.username = username;
+        this.correo = correo;
+        this.fecha = fecha;
+        this.numero_Inicio_de_sesion = 1;
+        this.contrasena = contrasena;
+        this.activo = true;
+    }
+    public void crearUsuario(String nombres,
                    String apellidos,
                    String username,
                    String correo,
@@ -101,6 +119,10 @@ public class Usuario {
     //Setters
 
 
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -141,6 +163,14 @@ public class Usuario {
 
     //Getters
 
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
 
     public String getUsername() {
         return username;
