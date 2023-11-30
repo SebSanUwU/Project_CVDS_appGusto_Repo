@@ -62,6 +62,7 @@ public class Restaurante {
         this.platillos = new ArrayList<Platillo>();
         this.nombreMarca = nombreMarca;
         this.nombreLegal = nombreLegal;
+        this.gerente = null;
 
 
     }
