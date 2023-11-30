@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping("/home")
     public String index() {
-        return "index"; // Esto se traduce en la plantilla Thymeleaf "index.html"
+        return "home"; // Esto se traduce en la plantilla Thymeleaf "home.html"
     }
 }

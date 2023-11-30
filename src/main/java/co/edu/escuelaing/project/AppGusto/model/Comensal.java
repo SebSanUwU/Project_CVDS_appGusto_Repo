@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 @Entity
 @Table(name = "COMENSAL")
-public class Comensal extends Usuario {
+public class Comensal extends User {
     @Transient
     private ArrayList<Platillo> carritoDeCompras;
 
@@ -26,8 +26,7 @@ public class Comensal extends Usuario {
 
 
     //Methods
-    public Comensal(Usuario usuario){
-        this.setID_usuario(usuario.getID_usuario());
+    public Comensal(User user){
         this.numeroPedidos = 0;
         this.metodosDePago = new ArrayList<MetodoDePago>();
         this.pedidos = new ArrayList<Pedido>();

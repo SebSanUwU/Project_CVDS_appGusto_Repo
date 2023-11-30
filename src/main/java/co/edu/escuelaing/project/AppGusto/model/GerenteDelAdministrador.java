@@ -2,16 +2,12 @@ package co.edu.escuelaing.project.AppGusto.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
 @Table(name = "GERENTE_DEL_ADMINISTRADOR")
-public class GerenteDelAdministrador extends Usuario {
+public class GerenteDelAdministrador extends User {
 
-    @ManyToOne
-    @JoinColumn(name = "ID_ADMINISTRADOR", referencedColumnName = "ID_USUARIO")
-    private Administrador ID_administrador;
 
     @OneToOne
     @JoinColumn(name = "RESTAURANTE_DEL_GERENTE", nullable = true)
@@ -25,21 +21,19 @@ public class GerenteDelAdministrador extends Usuario {
     /**
      * El administrador es el unico que puede crear un gerente.
      *
-     * @param ID_administrador //* @param ID_restaurante
+     * @param
      */
-    public GerenteDelAdministrador(Administrador ID_administrador, Restaurante restaurante, String nombres,
+    public GerenteDelAdministrador( Restaurante restaurante, String nombres,
                                    String apellidos,
                                    String username,
                                    String correo,
                                    Date fecha, String contrasena) {
-        super( nombres,apellidos,username,  correo,  fecha,  contrasena);
-        this.ID_administrador = ID_administrador;
+
         this.restauranteDelGerente = restaurante;
     }
 
-    public GerenteDelAdministrador(Usuario usuario, Administrador ID_administrador, Restaurante restaurante) {
-        this.setID_usuario(usuario.getID_usuario());
-        this.ID_administrador = ID_administrador;
+    public GerenteDelAdministrador(User user, Administrador ID_administrador, Restaurante restaurante) {
+
         this.restauranteDelGerente = restaurante;
     }
 
@@ -48,11 +42,6 @@ public class GerenteDelAdministrador extends Usuario {
 
     // setters
     // getters
-
-
-    public Administrador get_administrador() {
-        return ID_administrador;
-    }
 
     public Restaurante get_restaurante() {
         return restauranteDelGerente;

@@ -16,19 +16,19 @@ import java.util.stream.Collectors;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private UsuarioRepository userRepository;
+    private UserRepository userRepository;
 
-    public CustomUserDetailsService(UsuarioRepository userRepository) {
+    public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario user = userRepository.findByCorreo(email).get();
+        User user = userRepository.findByEmail(email);
 
         if (user != null) {
-            return new org.springframework.security.core.userdetails.User(user.getCorreo(),
-                    user.getContrasena(),
+            return new org.springframework.security.core.userdetails.User(user.getEmail(),
+                    user.getPassword(),
                     mapRolesToAuthorities(user.getRoles()));
         }else{
             throw new UsernameNotFoundException("Invalid username or password.");

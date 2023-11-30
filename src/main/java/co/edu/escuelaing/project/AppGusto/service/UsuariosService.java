@@ -3,18 +3,17 @@ package co.edu.escuelaing.project.AppGusto.service;
 import co.edu.escuelaing.project.AppGusto.model.Administrador;
 import co.edu.escuelaing.project.AppGusto.model.Comensal;
 import co.edu.escuelaing.project.AppGusto.model.GerenteDelAdministrador;
-import co.edu.escuelaing.project.AppGusto.model.Usuario;
+import co.edu.escuelaing.project.AppGusto.model.User;
 import co.edu.escuelaing.project.AppGusto.repository.AdministradorRepository;
 import co.edu.escuelaing.project.AppGusto.repository.ComensalRepository;
 import co.edu.escuelaing.project.AppGusto.repository.GerenteRepository;
-import co.edu.escuelaing.project.AppGusto.repository.UsuarioRepository;
+import co.edu.escuelaing.project.AppGusto.repository.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -25,17 +24,17 @@ public class UsuariosService {
     private final AdministradorRepository administradorRepository;
     private final ComensalRepository comensalRepository;
     private final GerenteRepository gerenteRepository;
-    private final UsuarioRepository usuarioRepository;
+    private final UserRepository userRepository;
 
     @Autowired
      public UsuariosService(AdministradorRepository administradorRepository,
                            ComensalRepository comensalRepository,
                            GerenteRepository gerenteRepository,
-                           UsuarioRepository usuarioRepository) {
+                           UserRepository userRepository) {
         this.administradorRepository = administradorRepository;
         this.comensalRepository = comensalRepository;
         this.gerenteRepository = gerenteRepository;
-        this.usuarioRepository = usuarioRepository;
+        this.userRepository = userRepository;
     }
 
 
@@ -49,8 +48,8 @@ public class UsuariosService {
     public GerenteDelAdministrador addGerente(GerenteDelAdministrador gerente){
         return gerenteRepository.save(gerente);
     }
-    public Usuario addUsuario(Usuario usuario){
-        return usuarioRepository.save(usuario);
+    public User addUsuario(User user){
+        return userRepository.save(user);
     }
 
     // Get for ID
@@ -63,8 +62,8 @@ public class UsuariosService {
     public GerenteDelAdministrador getGerente(Long gerenteID){
         return gerenteRepository.getReferenceById(gerenteID);
     }
-    public Usuario getUsuario(Long usuarioID){
-        return usuarioRepository.getReferenceById(usuarioID);
+    public User getUsuario(Long usuarioID){
+        return userRepository.getReferenceById(usuarioID);
     }
 
 
@@ -78,8 +77,8 @@ public class UsuariosService {
     public List<GerenteDelAdministrador> getAllGerentes(){
         return gerenteRepository.findAll();
     }
-    public List<Usuario> getAllUsuarios(){
-        return usuarioRepository.findAll();
+    public List<User> getAllUsuarios(){
+        return userRepository.findAll();
     }
 
    // Update
@@ -92,8 +91,8 @@ public class UsuariosService {
     public GerenteDelAdministrador updateGerente(GerenteDelAdministrador gerente){
         return gerenteRepository.save(gerente);
     }
-    public Usuario updateUsuario(Usuario usuario){
-        return usuarioRepository.save(usuario);
+    public User updateUsuario(User user){
+        return userRepository.save(user);
     }
 
     // Delete
@@ -108,7 +107,7 @@ public class UsuariosService {
     }
 
     public void deleteUsuario(Long usuarioId) {
-        usuarioRepository.deleteById(Long.valueOf(usuarioId));
+        userRepository.deleteById(Long.valueOf(usuarioId));
     }
 
 
@@ -124,9 +123,8 @@ public class UsuariosService {
         updateComensal(comensal);
     }
     public void desactiveUsuario (Long usuarioId){
-        Usuario usuario = comensalRepository.findById(usuarioId).get();
-        usuario.setActivo(false);
-        updateUsuario(usuario);
+        User user = comensalRepository.findById(usuarioId).get();
+        updateUsuario(user);
     }
 
 
@@ -138,7 +136,7 @@ public class UsuariosService {
       * @param tipoDeUsuario (tiene que ser "admin", "comensal"
      *                      - cualquier otra cosa se crea solo entonces un usuario)
      */
-    public void fillUsuarios(String tipoDeUsuario){
+    /*public void fillUsuarios(String tipoDeUsuario){
         ObjectMapper objectMapper = new ObjectMapper();
 
         try {
@@ -146,15 +144,15 @@ public class UsuariosService {
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             InputStream inputStream = connection.getInputStream();
-            List<Usuario> usuarios = objectMapper.readValue(inputStream, objectMapper.getTypeFactory().constructCollectionType(List.class, Usuario.class));
+            List<User> users = objectMapper.readValue(inputStream, objectMapper.getTypeFactory().constructCollectionType(List.class, User.class));
 
-            for (Usuario usuario : usuarios) {
-                this.addUsuario(usuario);
+            for (User user : users) {
+                this.addUsuario(user);
                 if(tipoDeUsuario == "admin"){
-                    Administrador aux= new Administrador(usuario);
+                    Administrador aux= new Administrador(user);
                     this.addAdministrador(aux);
                 } else if (tipoDeUsuario == "comensal") {
-                    Comensal aux= new Comensal(usuario);
+                    Comensal aux= new Comensal(user);
                     this.addComensal(aux);
                 }
             }
@@ -164,7 +162,7 @@ public class UsuariosService {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
 
 
