@@ -61,7 +61,7 @@ public class AuthController {
             userService.saveComensal(userDto);
         }
 
-        userService.saveUser(userDto);
+        //userService.saveUser(userDto);
         return "redirect:/register?success";
     }
 

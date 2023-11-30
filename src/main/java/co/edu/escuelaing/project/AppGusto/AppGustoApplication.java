@@ -22,16 +22,5 @@ public class AppGustoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AppGustoApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner run() throws Exception {
-		return (args) -> {
-
-			System.out.println("Adding Configurations....");
-			configurationService.addConfiguration(new Configuration("premio", "800000"));
-
-			System.out.println("\nGetting all configurations....");
-			configurationService.getAllConfigurations().forEach(configuration -> System.out.println(configuration));
-		};
-	}
 
 }

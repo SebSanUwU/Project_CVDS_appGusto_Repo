@@ -4,6 +4,7 @@ package co.edu.escuelaing.project.AppGusto.service;
 import co.edu.escuelaing.project.AppGusto.dto.UserDto;
 import co.edu.escuelaing.project.AppGusto.model.*;
 import co.edu.escuelaing.project.AppGusto.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
     public UserServiceImpl(UserRepository userRepository, AdministradorRepository administradorRepository, GerenteRepository gerenteRepository, ComensalRepository comensalRepository,
                            RoleRepository roleRepository,
                            PasswordEncoder passwordEncoder) {
@@ -59,6 +61,14 @@ public class UserServiceImpl implements UserService {
         administrador.setEmail(userDto.getEmail());
         // encrypt the password using spring security
         administrador.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
+        Role role = roleRepository.findByName("ROLE_ADMIN");
+        if(role == null){
+            role = checkRoleExist();
+        }
+
+        administrador.setRoles(Arrays.asList(role));
+
         administradorRepository.save(administrador);
     }
 
@@ -69,6 +79,14 @@ public class UserServiceImpl implements UserService {
         gerenteDelAdministrador.setEmail(userDto.getEmail());
         // encrypt the password using spring security
         gerenteDelAdministrador.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
+        Role role = roleRepository.findByName("ROLE_GERENTE");
+        if(role == null){
+            role = checkRoleExist();
+        }
+
+        gerenteDelAdministrador.setRoles(Arrays.asList(role));
+
         gerenteRepository.save(gerenteDelAdministrador);
     }
 
@@ -79,6 +97,14 @@ public class UserServiceImpl implements UserService {
         comensal.setEmail(userDto.getEmail());
         // encrypt the password using spring security
         comensal.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
+        Role role = roleRepository.findByName("ROLE_COMENSAL");
+        if(role == null){
+            role = checkRoleExist();
+        }
+
+        comensal.setRoles(Arrays.asList(role));
+
         comensalRepository.save(comensal);
     }
 

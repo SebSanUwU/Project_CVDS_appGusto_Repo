@@ -89,6 +89,7 @@ public class Restaurante {
     //setters
 
 
+
     public void setNombreMarca(String nombreMarca) {
         this.nombreMarca = nombreMarca;
     }
