@@ -22,8 +22,8 @@ public class MetodosDePagoService {
         return metodoDePagoRepository.save(metodoDePago);
     }
     //Get for ID
-    public Pedido getPedido(Long pedidoID){
-        return pedidoRepository.getReferenceById(pedidoID);
+    public MetodoDePago getMetodoDePago(Long metodoDePagoID){
+        return metodoDePagoRepository.getReferenceById(metodoDePagoID);
     }
     //Get All
     public List<MetodoDePago> getAllMetodosDePagos(){
