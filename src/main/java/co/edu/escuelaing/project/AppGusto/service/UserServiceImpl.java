@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         if(role == null){
             role = checkRoleExist();
         }
-        user.setRoles(Arrays.asList(role));
+        //user.setRoles(Arrays.asList(role));
         userRepository.save(user);
     }
 
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Usuario findUserByEmail(String email) {
-        return userRepository.findByCorreo(email).get();
+        return userRepository.findByCorreo(email);
     }
 
     @Override

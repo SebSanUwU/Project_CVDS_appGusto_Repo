@@ -18,15 +18,17 @@
     <div class="text-center">
         <h1 class="mt-5">Crear una cuenta</h1>
         <div class="box mt-5">
-            <form action="/" class="form-group" method="post">
-                <label for="id">Correo Electrónico:</label><br>
-                <input class="form-control" type="text" id="id" name="id" required><br>
-                <label for="fname">Nombre de Usuario:</label><br>
-                <input class="form-control" type="text" id="fname" name="fname" required><br>
-                <label for="lname">Contraseña:</label><br>
-                <input class="form-control" type="text" id="lname" name="lname" required>
-                <label for="role">Role:</label><br>
-                <input class="form-control" type="text" id="role" name="role">
+            <form action="/login/register" class="form-group" method="post" th:object="${administrador}">
+                <label for="username"> Nombre de Usuario:</label><br>
+                <input class="form-control" type="text" id="username" name="username" th:field="*{username}" required><br>
+                <label for="name">Nombres del Usuario:</label><br>
+                <input class="form-control" type="text" id="name" name="name" th:field="*{nombres}" required><br>
+                <label for="apellidos">Apellidos del Usuario:</label><br>
+                <input class="form-control" type="text" id="apellidos" name="apellidos" th:field="*{apellidos}" required><br>
+                <label for="correo">Correo Electrónico:</label><br>
+                <input class="form-control" type="text" id="correo" name="correo" th:field="*{correo}" required><br>
+                <label for="contrasena">Contraseña:</label><br>
+                <input class="form-control" type="text" id="contrasena" name="contrasena" th:field="*{contrasena}" required>
                 <input class="btn btn-light mt-5" type="submit" value="Crear">
             </form>
         </div>

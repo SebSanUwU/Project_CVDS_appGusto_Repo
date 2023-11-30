@@ -39,12 +39,15 @@ public class Usuario {
     @Column(name = "ACTIVO", columnDefinition = "BOOLEAN")
     private boolean activo;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "users_roles",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID_usuario")},
-            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
-    private List<Role> roles = new ArrayList<>();
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "users_roles",
+//            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID_usuario")},
+//            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
+//    private List<Role> roles = new ArrayList<>();
+
+    @Column(name = "roles", nullable=false)
+    private List<UserRole> roles;
 
 
     //Constructors
@@ -119,10 +122,9 @@ public class Usuario {
     //Setters
 
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<UserRole> roles) {
         this.roles = roles;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -168,7 +170,7 @@ public class Usuario {
         return contrasena;
     }
 
-    public List<Role> getRoles() {
+    public List<UserRole> getRoles() {
         return roles;
     }
 
