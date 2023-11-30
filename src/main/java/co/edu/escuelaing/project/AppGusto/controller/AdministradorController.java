@@ -13,4 +13,23 @@ public class AdministradorController {
     public String admin(Model model) {
         return "administrador";
     }
+
+    @GetMapping("/agregarRestaurante")
+    public String getAgregarRestaurante(){
+        return "AgregarRestaurante";
+    }
+    @GetMapping("/agregarGerente")
+    public String getAgregarGerente(){
+        return "AgregarGerente";
+    }
+
+    @GetMapping("/MisRestaurantes")
+    public String getMisRestaurantes(){
+        return "MisRestaurantes";
+    }
+
+    @GetMapping("/Estadistica")
+    public String getEstadistica(){
+        return "MisEstadisticas";
+    }
 }
