@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import co.edu.escuelaing.project.AppGusto.model.*;
 import java.time.Instant;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.UUID;
-import java.util.Date;
+import java.util.*;
 import java.time.LocalDate;
 
 @Controller
@@ -76,7 +73,8 @@ public class LoginController {
     }
 
     @GetMapping("register")
-    public String register() {
+    public String register(Model model) {
+        model.addAttribute("administrador", new Administrador());
         return "login/register";
     }
 
@@ -96,6 +94,9 @@ public class LoginController {
          Date fechaDate = java.sql.Date.valueOf(fechaLocal);
          administrador.setFecha(fechaDate);
          userRepository.save(administrador);
+         ArrayList<UserRole> roles = new ArrayList<>();
+         roles.add(UserRole.ADMINISTRADOR);
+         administrador.setRoles(roles);
         return "redirect:/login";
      }
 

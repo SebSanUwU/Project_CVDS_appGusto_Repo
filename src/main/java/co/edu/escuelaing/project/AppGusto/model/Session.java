@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @ToString
-@Table(name = "session")
+@Table(name = "session_1")
 public class Session {
     @Id
     @Column(name = "token", nullable=false, unique=true)
@@ -23,6 +23,6 @@ public class Session {
     private Instant timestamp;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ID_usuario", nullable = false)
+    @JoinColumn(name = "Id_usuario", nullable = false)
     private Usuario user;
 }

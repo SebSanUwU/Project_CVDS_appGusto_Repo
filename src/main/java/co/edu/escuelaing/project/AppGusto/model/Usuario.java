@@ -39,6 +39,7 @@ public class Usuario {
     @Column(name = "ACTIVO", columnDefinition = "BOOLEAN")
     private boolean activo;
 
+
 //    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    @JoinTable(
 //            name = "users_roles",
@@ -46,7 +47,7 @@ public class Usuario {
 //            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
 //    private List<Role> roles = new ArrayList<>();
 
-    @Column(name = "roles", nullable=false)
+    @Column(name = "roles", nullable=true)
     private List<UserRole> roles;
 
 
@@ -122,6 +123,10 @@ public class Usuario {
     //Setters
 
 
+//    public void setSessions(ArrayList<Session> sessions) {
+//        this.sessions = sessions;
+//    }
+
     public void setRoles(List<UserRole> roles) {
         this.roles = roles;
     }
@@ -165,6 +170,10 @@ public class Usuario {
 
     //Getters
 
+
+//    public ArrayList<Session> getSessions() {
+//        return sessions;
+//    }
 
     public String getContrasena() {
         return contrasena;
