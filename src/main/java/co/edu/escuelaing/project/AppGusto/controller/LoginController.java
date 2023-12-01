@@ -74,7 +74,7 @@ public class LoginController {
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         response.addCookie(cookie);
-        return LOGIN_PAGE;
+        return "index";
     }
 
     @GetMapping("register")

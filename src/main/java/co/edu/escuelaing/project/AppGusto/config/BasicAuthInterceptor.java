@@ -54,11 +54,23 @@ public class BasicAuthInterceptor implements HandlerInterceptor {
                     sessionRepository.delete(session);
                     response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED, "SessionTimeout");
                     return false;
-                } else if (path.startsWith("/login/protected") && !session.getUser().getRoles().contains(UserRole.ADMINISTRADOR)) {
+                } else if (path.startsWith("/login/protected")
+                        && !session.getUser().getRoles().contains(UserRole.ADMINISTRADOR)
+                        || !session.getUser().getRoles().contains(UserRole.COMENSAL)
+                        ||!session.getUser().getRoles().contains(UserRole.GERENTE) ) {
                     response.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden");
                     return false;
-                } else {
+                } else if (path.startsWith("login/protected/admin/**")
+                        && session.getUser().getRoles().contains(UserRole.ADMINISTRADOR)) {
                     return true;
+                }else if (path.startsWith("login/protected/comensal/**")
+                        && session.getUser().getRoles().contains(UserRole.COMENSAL)) {
+                    return true;
+                } else if (path.startsWith("login/protected/gerente/**")
+                        && session.getUser().getRoles().contains(UserRole.GERENTE)) {
+                    return true;
+                }else {
+                    return false;
                 }
             } else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Bad Request");
