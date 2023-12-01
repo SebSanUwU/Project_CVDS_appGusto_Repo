@@ -33,10 +33,12 @@ public class LoginController {
             UsuarioRepository userRepository,
             SessionRepository sessionRepository,
             UsuariosService usuariosService
+
     ) {
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
         this.usuariosServices = usuariosService;
+
     }
 
     @GetMapping("")
@@ -50,7 +52,7 @@ public class LoginController {
         if (user == null) {
             model.addAttribute("errors", Arrays.asList("Usuario no encontrado"));
             return LOGIN_PAGE;
-        } else if (!user.getContrasena().equals(parameters.get("password"))) {
+        } else if (!user.getContrasena().equals(UsuariosService.encodePassword(parameters.get("password")))) {
             model.addAttribute("errors", Arrays.asList("Contraseña incorrecta"));
             return LOGIN_PAGE;
         } else {
@@ -90,29 +92,26 @@ public class LoginController {
          Usuario existingUser = usuariosServices.findByCorreo(usuario.getCorreo());
 
          if(existingUser != null && existingUser.getCorreo() != null && !existingUser.getCorreo().isEmpty()){
-             result.rejectValue("correo", null,
+             result.rejectValue("email", null,
                      "There is already an account registered with the same email");
          }
-         System.out.println("el correo es");
-         System.out.println(usuario.getCorreo());
+
 
          LocalDate fechaLocal = LocalDate.now();
          Date fechaDate = java.sql.Date.valueOf(fechaLocal);
          usuario.setFecha(fechaDate);
+         usuario.setContrasena(UsuariosService.encodePassword(usuario.getContrasena()));
 
-
-         ArrayList<UserRole> roles = new ArrayList<>();
 
          if(tipoUsuario.equals("administrador")){
-             roles.add(UserRole.ADMINISTRADOR);
-             usuario.setRoles(roles);
              Administrador administrador = new Administrador(usuario);
+             administrador.setRoles(Arrays.asList(UserRole.ADMINISTRADOR));
              usuariosServices.addAdministrador(administrador);
          }
          if(tipoUsuario.equals("comensal")){
-             roles.add(UserRole.COMENSAL);
-             usuario.setRoles(roles);
+
              Comensal comensal= new Comensal(usuario);
+             comensal.setRoles(Arrays.asList(UserRole.COMENSAL));
              usuariosServices.addComensal(comensal);
          }
         return "redirect:/login";

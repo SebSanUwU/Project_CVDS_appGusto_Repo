@@ -10,6 +10,11 @@ import co.edu.escuelaing.project.AppGusto.repository.GerenteRepository;
 import co.edu.escuelaing.project.AppGusto.repository.UsuarioRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -27,16 +32,44 @@ public class UsuariosService {
     private final GerenteRepository gerenteRepository;
     private final UsuarioRepository usuarioRepository;
 
+
+
     @Autowired
      public UsuariosService(AdministradorRepository administradorRepository,
                            ComensalRepository comensalRepository,
                            GerenteRepository gerenteRepository,
-                           UsuarioRepository usuarioRepository) {
+                           UsuarioRepository usuarioRepository
+                           ) {
         this.administradorRepository = administradorRepository;
         this.comensalRepository = comensalRepository;
         this.gerenteRepository = gerenteRepository;
         this.usuarioRepository = usuarioRepository;
+
     }
+
+    public static String encodePassword(String plainPassword) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] encodedHash = digest.digest(
+                    plainPassword.getBytes(StandardCharsets.UTF_8));
+
+            // Convierte el hash a una representación hexadecimal
+            StringBuilder hexString = new StringBuilder(2 * encodedHash.length);
+            for (byte b : encodedHash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            // Maneja la excepción apropiadamente
+            throw new RuntimeException("Error al codificar la contraseña.", e);
+        }
+    }
+
+
 
 
     // Add

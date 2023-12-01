@@ -47,7 +47,7 @@ public class Usuario {
 //            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
 //    private List<Role> roles = new ArrayList<>();
 
-    @Column(name = "roles", nullable=true)
+    @Column(name = "roles", nullable=false)
     private List<UserRole> roles;
 
 
