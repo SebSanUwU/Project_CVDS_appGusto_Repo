@@ -3,15 +3,15 @@ package co.edu.escuelaing.project.AppGusto.controller;
 
 import co.edu.escuelaing.project.AppGusto.repository.SessionRepository;
 import co.edu.escuelaing.project.AppGusto.repository.UsuarioRepository;
+import co.edu.escuelaing.project.AppGusto.service.UsuariosService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import co.edu.escuelaing.project.AppGusto.model.*;
 import java.time.Instant;
 import java.util.*;
@@ -26,14 +26,17 @@ public class LoginController {
     private final UsuarioRepository userRepository;
 
     private final SessionRepository sessionRepository;
+    private final UsuariosService usuariosServices;
 
     @Autowired
     public LoginController(
             UsuarioRepository userRepository,
-            SessionRepository sessionRepository
+            SessionRepository sessionRepository,
+            UsuariosService usuariosService
     ) {
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
+        this.usuariosServices = usuariosService;
     }
 
     @GetMapping("")
@@ -74,29 +77,44 @@ public class LoginController {
 
     @GetMapping("register")
     public String register(Model model) {
-        model.addAttribute("administrador", new Administrador());
+        model.addAttribute("usuario", new Usuario());
         return "login/register";
     }
 
-//    @PostMapping("register")
-//    public String registerSubmit(@RequestParam Map<String, String> parameters) {
-//        Usuario user = new Usuario(
-//                parameters.get("email"),
-//                parameters.get("password"),
-//                Arrays.asList(UserRole.CLIENTE)
-//        );
-//        userRepository.save(user);
-//        return "redirect:/login";
-//    }
      @PostMapping("register")
-     public String registerSubmit(Administrador administrador) {
+     public String registerSubmit(@Valid @ModelAttribute("usuario") Usuario usuario,
+                                  BindingResult result,
+                                  @RequestParam("tipoUsuario") String tipoUsuario,
+                                  Model model) {
+
+         Usuario existingUser = usuariosServices.findByCorreo(usuario.getCorreo());
+
+         if(existingUser != null && existingUser.getCorreo() != null && !existingUser.getCorreo().isEmpty()){
+             result.rejectValue("correo", null,
+                     "There is already an account registered with the same email");
+         }
+         System.out.println("el correo es");
+         System.out.println(usuario.getCorreo());
+
          LocalDate fechaLocal = LocalDate.now();
          Date fechaDate = java.sql.Date.valueOf(fechaLocal);
-         administrador.setFecha(fechaDate);
-         userRepository.save(administrador);
+         usuario.setFecha(fechaDate);
+
+
          ArrayList<UserRole> roles = new ArrayList<>();
-         roles.add(UserRole.ADMINISTRADOR);
-         administrador.setRoles(roles);
+
+         if(tipoUsuario.equals("administrador")){
+             roles.add(UserRole.ADMINISTRADOR);
+             usuario.setRoles(roles);
+             Administrador administrador = new Administrador(usuario);
+             usuariosServices.addAdministrador(administrador);
+         }
+         if(tipoUsuario.equals("comensal")){
+             roles.add(UserRole.COMENSAL);
+             usuario.setRoles(roles);
+             Comensal comensal= new Comensal(usuario);
+             usuariosServices.addComensal(comensal);
+         }
         return "redirect:/login";
      }
 

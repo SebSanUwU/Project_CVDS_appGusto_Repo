@@ -129,6 +129,11 @@ public class UsuariosService {
         updateUsuario(usuario);
     }
 
+    //Bucar por correo
+    public Usuario findByCorreo(String correo) {
+        return  usuarioRepository.findByCorreo(correo);
+    }
+
 
 
     /**
@@ -165,7 +170,6 @@ public class UsuariosService {
         }
 
     }
-
 
 
 

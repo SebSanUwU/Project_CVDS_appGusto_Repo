@@ -18,21 +18,89 @@
     <div class="text-center">
         <h1 class="mt-5">Crear una cuenta</h1>
         <div class="box mt-5">
-            <form action="/login/register" class="form-group" method="post" th:object="${administrador}">
-                <label for="username"> Nombre de Usuario:</label><br>
-                <input class="form-control" type="text" id="username" name="username" th:field="*{username}" required><br>
-                <label for="name">Nombres del Usuario:</label><br>
-                <input class="form-control" type="text" id="name" name="name" th:field="*{nombres}" required><br>
-                <label for="apellidos">Apellidos del Usuario:</label><br>
-                <input class="form-control" type="text" id="apellidos" name="apellidos" th:field="*{apellidos}" required><br>
-                <label for="correo">Correo Electrónico:</label><br>
-                <input class="form-control" type="text" id="correo" name="correo" th:field="*{correo}" required><br>
-                <label for="contrasena">Contraseña:</label><br>
-                <input class="form-control" type="text" id="contrasena" name="contrasena" th:field="*{contrasena}" required>
-                <input class="btn btn-light mt-5" type="submit" value="Crear">
+            <form  method="post"
+                   role="form"
+                   th:action="@{/login/register}"
+                   th:object="${usuario}">
+                <div class="form-group mb-3">
+                    <label class="form-label">Username</label>
+                    <input
+                            class="form-control"
+                            id="username"
+                            name="username"
+                            placeholder="Pon un Username"
+                            th:field="*{username}"
+                            type="text"
+                    />
+                    <p th:errors = "*{username}" class="text-danger"
+                       th:if="${#fields.hasErrors('username')}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Nombres</label>
+                    <input
+                            class="form-control"
+                            id="nombres"
+                            name="nombres"
+                            placeholder="Pon tus nombres"
+                            th:field="*{nombres}"
+                            type="text"
+                    />
+                    <p th:errors = "*{nombres}" class="text-danger"
+                       th:if="${#fields.hasErrors('nombres')}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Apellidos</label>
+                    <input
+                            class="form-control"
+                            id="apellidos"
+                            name="apellidos"
+                            placeholder="Pon tus apellidos"
+                            th:field="*{apellidos}"
+                            type="text"
+                    />
+                    <p th:errors = "*{apellidos}" class="text-danger"
+                       th:if="${#fields.hasErrors('apellidos')}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Correo</label>
+                    <input
+                            class="form-control"
+                            id="correo"
+                            name="correo"
+                            placeholder="Pon tu correo"
+                            th:field="*{correo}"
+                            type="email"
+                    />
+                    <p th:errors = "*{correo}" class="text-danger"
+                       th:if="${#fields.hasErrors('correo')}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label class="form-label">Contraseña</label>
+                    <input
+                            class="form-control"
+                            id="contrasena"
+                            name="contrasena"
+                            placeholder="Pon tu contraseña"
+                            th:field="*{contrasena}"
+                            type="password"
+                    />
+                    <p th:errors = "*{contrasena}" class="text-danger"
+                       th:if="${#fields.hasErrors('contrasena')}"></p></div>
+
+                <div class="form-group mb-3">
+                    <label for="tipoUsuario">Tipo de Usuario:</label>
+                    <select id="tipoUsuario" name="tipoUsuario">
+                        <option value="administrador">Administrador</option>
+                        <option value="comensal">Comensal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                    <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+                </div>
             </form>
-        </div>
     </div>
+</div>
 </div>
 
 <!-- Optional JavaScript -->

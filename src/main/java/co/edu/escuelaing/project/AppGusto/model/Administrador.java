@@ -6,6 +6,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "ADMINISTRADOR")
@@ -14,9 +15,8 @@ public class Administrador extends Usuario {
     @Column(name = "NUMERO_RESTAURANTES", length = 9)
     private int numero_Restaurantes;
     @OneToMany(mappedBy = "admin")
-    private ArrayList<Restaurante> restaurantes;
-    @OneToMany(mappedBy = "ID_administrador")
-    private  ArrayList<GerenteDelAdministrador> gerentes;
+    private List<Restaurante> restaurantes;
+
     @Column(name = "ACTIVO_ADMINISTRADOR", columnDefinition = "BOOLEAN")
     private boolean activoAdministrador;
 
@@ -28,12 +28,12 @@ public class Administrador extends Usuario {
 
     //methods
     public Administrador(Usuario usuario){
-        this.setID_usuario(usuario.getID_usuario());
+        super(usuario);
         this.numero_Restaurantes = 0;
         this.restaurantes= new ArrayList<Restaurante>();
-        this.gerentes= new ArrayList<GerenteDelAdministrador>();
         this.setActivoAdministrador(true);
     }
+
 
 
 
@@ -44,9 +44,6 @@ public class Administrador extends Usuario {
         this.restaurantes = restaurantes;
     }
 
-    public void setGerentes(ArrayList<GerenteDelAdministrador> gerentes) {
-        this.gerentes = gerentes;
-    }
 
     public void setActivoAdministrador(boolean activeAdministrador) {
         this.activoAdministrador = activeAdministrador;
@@ -72,11 +69,8 @@ public class Administrador extends Usuario {
         return numero_Restaurantes;
     }
 
-    public ArrayList<Restaurante> getRestaurantes() {
+    public List<Restaurante> getRestaurantes() {
         return restaurantes;
     }
 
-    public ArrayList<GerenteDelAdministrador> getGerentes() {
-        return gerentes;
-    }
 }

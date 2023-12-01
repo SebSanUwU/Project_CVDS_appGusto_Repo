@@ -69,6 +69,18 @@ public class Usuario {
         this.contrasena = contrasena;
         this.activo = true;
     }
+
+    public Usuario(Usuario usuario) {
+        this.nombres = usuario.getNombres();
+        this.apellidos = usuario.getApellidos();
+        this.username = usuario.getUsername();
+        this.correo = usuario.getCorreo();
+        this.fecha = usuario.getFecha();
+        this.numero_Inicio_de_sesion = 1;
+        this.contrasena = usuario.getContrasena();
+        this.activo = true;
+    }
+
     public void crearUsuario(String nombres,
                    String apellidos,
                    String username,

@@ -3,6 +3,7 @@ package co.edu.escuelaing.project.AppGusto.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +20,7 @@ public class Pedido {
     @JoinColumn(name = "ID_USUARIO")
     private Comensal id_comensal;
     @ManyToMany(mappedBy = "pedidos")
-    private ArrayList<Platillo> platillos;
+    private List<Platillo> platillos;
 
     @Column(name = "COSTO_TOTAL", length = 20)
     private int costoTotal;
@@ -80,7 +81,7 @@ public class Pedido {
         return costoTotal;
     }
 
-    public ArrayList<Platillo> getPlatillos() {
+    public List<Platillo> getPlatillos() {
         return platillos;
     }
 }

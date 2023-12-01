@@ -9,9 +9,7 @@ import java.util.Date;
 @Table(name = "GERENTE_DEL_ADMINISTRADOR")
 public class GerenteDelAdministrador extends Usuario {
 
-    @ManyToOne
-    @JoinColumn(name = "ID_ADMINISTRADOR", referencedColumnName = "ID_USUARIO")
-    private Administrador ID_administrador;
+
 
     @OneToOne
     @JoinColumn(name = "RESTAURANTE_DEL_GERENTE", nullable = true)
@@ -33,13 +31,11 @@ public class GerenteDelAdministrador extends Usuario {
                                    String correo,
                                    Date fecha, String contrasena) {
         super( nombres,apellidos,username,  correo,  fecha,  contrasena);
-        this.ID_administrador = ID_administrador;
         this.restauranteDelGerente = restaurante;
     }
 
     public GerenteDelAdministrador(Usuario usuario, Administrador ID_administrador, Restaurante restaurante) {
         this.setID_usuario(usuario.getID_usuario());
-        this.ID_administrador = ID_administrador;
         this.restauranteDelGerente = restaurante;
     }
 
@@ -49,10 +45,6 @@ public class GerenteDelAdministrador extends Usuario {
     // setters
     // getters
 
-
-    public Administrador get_administrador() {
-        return ID_administrador;
-    }
 
     public Restaurante get_restaurante() {
         return restauranteDelGerente;
