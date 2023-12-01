@@ -10,8 +10,19 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
     <style>
+        body {
+            background-color: #F9EBEA ; /* Color de fondo naranja */
+        }
+
+        .container {
+            background-color: #F6002F; /* Color de fondo naranja */
+            padding-bottom: 20px; /* Espacio inferior del contenedor */
+        }
+
+        .carousel-inner {
+            background-color: white; /* Color de fondo blanco en el carrusel */
+        }
         .footer {
             background-color: #F6002F;
             color: white;
@@ -65,7 +76,11 @@
         input[type="email"] {
             width: 400px; /* Ancho ajustable según tus preferencias */
         }
-
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px; /* Reducir el margen inferior para evitar mucho espacio entre campos */
+        }
     </style>
 
 </head>
@@ -90,59 +105,50 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner" style="background-color: white;"> <!-- Agregamos el color de fondo al contenedor del carrusel -->
         <div class="carousel-item active text-center">
-            <img src="./img/Registra%20tu%20restaurante.png" alt="Imagen reducida a la mitad" style="width: 50%; height: auto; display: block; margin: auto;">
+            <img src="./img/chef.jpg" alt="Imagen reducida a la mitad" style="width: 20%; height: auto; display: block; margin: auto;">
             <h1>¡¡¡Registra Tu Restaurante!!!</h1>
             <p>Tu crecimiento es importante para nosotros tu AppGusto. Incrementa tus ventas con todos los recursos que tenemos para tu restaurante.</p>
-            <p><strong>¡Vender por AppGusto es de lo mejor!</strong></p>        </div>
+            <p><strong>¡Vender por AppGusto es de lo mejor!</strong></p>
+        </div>
     </div>
     <!-- Forma -->
-    <h2>Ingresa tus datos</h2>
-    <form action="/submit-tu-formulario" method="post" onsubmit="return validarFormulario();">
-        <div style="display: flex; align-items: center; justify-content: center;">
-            <div style="margin-right: 10px;">
-                <label for="nombre">Tu nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
-            </div>
+    <div class="container-fluid" style="background-color: #FADBD8; padding: 15px;">
+        <div class="text-center">
+            <h1 class="mt-5" style="color: #6C3483;">Crea tu Restaurante</h1>
+            <div class="box mt-5">
+                <form action="/" class="form-group" method="post">
+                    <label for="nombre">Nombre del Restaurante:</label><br>
+                    <input class="form-control" type="text" id="nombre" name="nombre" required><br>
 
-            <div style="margin-left: 10px;">
-                <label for="apellido">Tu apellido:</label>
-                <input type="text" id="apellido" name="apellido" required>
-            </div>
-        </div>
+                    <label for="nombreMarca">Nombre de la marca:</label><br>
+                    <input class="form-control" type="text" id="nombreMarca" name="nombreMarca" required><br>
 
-        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
-            <div style="margin-right: 10px;">
-                <label for="indicativos">Indicativos:</label>
-                <select id="indicativos" name="indicativos">
-                    <option value="">Selecciona un país</option>
-            <option value="+1">Estados Unidos (+1)</option>
-            <option value="+44">Reino Unido (+44)</option>
-            <option value="+49">Alemania (+49)</option>
-            <option value="+57">Colombia (+57)</option>
-            <option value="+54">Argentina (+54)</option>
-            <option value="+55">Brasil (+55)</option>
-            <option value="+56">Chile (+56)</option>
-            <option value="+506">Costa Rica (+506)</option>
-            <option value="+593">Ecuador (+593)</option>
-            <option value="+52">México (+52)</option>
-            <option value="+51">Perú (+51)</option>
-            <option value="+598">Uruguay (+598)</option>
-                </select>
-            </div>
-            <div style="margin-left: 10px;">
-                <label for="movil">Tu móvil:</label>
-                <input type="text" id="movil" name="movil" required>
-            </div>
-        </div>
-        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px;">
-            <div>
-                <label for="emailResponsable">E-mail del Responsable:</label>
-                <input type="email" id="emailResponsable" name="emailResponsable" required>
+                    <label for="nombreLegal">Nombre legal del Restaurante:</label><br>
+                    <input class="form-control" type="text" id="nombreLegal" name="nombreLegal" required><br>
+
+                    <label for="calificacion">Calificación de tu Restaurante:</label><br>
+                    <input class="form-control" type="text" id="calificacion" name="calificacion">
+
+                    <label for="direccion">Dirección del Restaurante:</label><br>
+                    <input class="form-control col-8 mx-auto" type="text" id="direccion" name="direccion" required><br>
+
+                    <label for="documentos">Carga los documentos de tu Restaurante:</label><br>
+                    <div class="text-center">
+                        <input class="form-control-file d-inline-block" type="file" id="documentos" name="documentos" required>
+                    </div>
+
+                    <label for="verificado">¿Tu Restaurante está verificado?</label><br>
+                    <select id="verificado" name="verificado" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="Si">Si</option>
+                        <option value="No">No</option>
+                    </select>
+
+                    <input class="btn btn-primary mt-4" type="submit" value="Crear">
+                </form>
             </div>
         </div>
-        <br>
-        <input type="submit" class="btn btn-orange" value="Enviar">
-    </form>
+    </div>
     <!-- Imagen centrada -->
     <div class="text-center mt-4">
         <img src="./img/logo.jpg" alt="Imagen pequeña" style="width: 80px; height: 80px;">
@@ -150,7 +156,9 @@
 
     <div class="my-4"></div> <!-- Utilizamos la clase my-4 para crear un margen vertical -->
 </div>
-
+<!-- Agregar los scripts de Select2 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <!-- Pie de página -->
 <footer class="footer">
     <div class="container">
@@ -158,16 +166,6 @@
     </div>
 </footer>
 </body>
-<script>
-    function validarFormulario() {
-        var indicativos = document.getElementById("indicativos");
-        if (indicativos.value === "") {
-            alert("Por favor, selecciona un país.");
-            return false;
-        }
-        return true;
-    }
-</script>
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
