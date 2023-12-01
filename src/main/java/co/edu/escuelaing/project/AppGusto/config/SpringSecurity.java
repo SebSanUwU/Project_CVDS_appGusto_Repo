@@ -13,9 +13,10 @@ package co.edu.escuelaing.project.AppGusto.config;
 //import org.springframework.security.web.SecurityFilterChain;
 //import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
 //@Configuration
 //@EnableWebSecurity
-public class Security {
+public class SpringSecurity {
 //
 //    @Autowired
 //    private UserDetailsService userDetailsService;

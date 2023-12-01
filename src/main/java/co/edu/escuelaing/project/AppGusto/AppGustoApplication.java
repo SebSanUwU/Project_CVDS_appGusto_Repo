@@ -22,6 +22,7 @@ public class AppGustoApplication {
 	private final ConfigurationService configurationService;
 
 	private final UsuarioRepository userRepository;
+
 	@Autowired
 	public AppGustoApplication(
 			ConfigurationService configurationService,
@@ -30,9 +31,12 @@ public class AppGustoApplication {
 		this.configurationService = configurationService;
 		this.userRepository = userRepository;
 	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(AppGustoApplication.class, args);
 	}
+
+
 	@Bean
 	public CommandLineRunner run() throws Exception {
 		return (args) -> {
@@ -45,5 +49,6 @@ public class AppGustoApplication {
 			//userRepository.save(new User("admin@site.org", "admin", Arrays.asList(UserRole.ADMINISTRADOR, UserRole.CLIENTE)));
 		};
 	}
+
 
 }

@@ -8,6 +8,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String index() {
-        return "index"; // Esto se traduce en la plantilla Thymeleaf "index.html"
+        return "home"; // Esto se traduce en la plantilla Thymeleaf "home.html"
     }
 }

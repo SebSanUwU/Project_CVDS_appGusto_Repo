@@ -35,11 +35,11 @@ public class UsuariosService {
 
 
     @Autowired
-     public UsuariosService(AdministradorRepository administradorRepository,
+    public UsuariosService(AdministradorRepository administradorRepository,
                            ComensalRepository comensalRepository,
                            GerenteRepository gerenteRepository,
                            UsuarioRepository usuarioRepository
-                           ) {
+    ) {
         this.administradorRepository = administradorRepository;
         this.comensalRepository = comensalRepository;
         this.gerenteRepository = gerenteRepository;
@@ -115,10 +115,10 @@ public class UsuariosService {
         return usuarioRepository.findAll();
     }
 
-   // Update
-   public Administrador updateAdministrador(Administrador administrador){
-       return administradorRepository.save(administrador);
-   }
+    // Update
+    public Administrador updateAdministrador(Administrador administrador){
+        return administradorRepository.save(administrador);
+    }
     public Comensal updateComensal(Comensal comensal){
         return comensalRepository.save(comensal);
     }
@@ -173,7 +173,7 @@ public class UsuariosService {
      * Fill Usuarios - se tiene que especificar que
      * tipo de usario es para poder llenar automaticamente
      * la base de datos
-      * @param tipoDeUsuario (tiene que ser "admin", "comensal"
+     * @param tipoDeUsuario (tiene que ser "admin", "comensal"
      *                      - cualquier otra cosa se crea solo entonces un usuario)
      */
     public void fillUsuarios(String tipoDeUsuario){
@@ -203,7 +203,4 @@ public class UsuariosService {
         }
 
     }
-
-
-
 }

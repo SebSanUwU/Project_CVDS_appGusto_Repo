@@ -14,13 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name="roles")
-public class Role
-{
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID;
 
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String name;
 
 //    @ManyToMany(mappedBy="roles")

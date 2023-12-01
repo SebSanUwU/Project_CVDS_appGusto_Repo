@@ -2,13 +2,11 @@ package co.edu.escuelaing.project.AppGusto.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 @Entity
 @Table(name = "GERENTE_DEL_ADMINISTRADOR")
 public class GerenteDelAdministrador extends Usuario {
-
 
 
     @OneToOne
@@ -23,19 +21,21 @@ public class GerenteDelAdministrador extends Usuario {
     /**
      * El administrador es el unico que puede crear un gerente.
      *
-     * @param ID_administrador //* @param ID_restaurante
+     * @param
      */
-    public GerenteDelAdministrador(Administrador ID_administrador, Restaurante restaurante, String nombres,
+    public GerenteDelAdministrador( Restaurante restaurante, String nombres,
                                    String apellidos,
                                    String username,
                                    String correo,
                                    Date fecha, String contrasena) {
+
         super( nombres,apellidos,username,  correo,  fecha,  contrasena);
         this.restauranteDelGerente = restaurante;
     }
 
     public GerenteDelAdministrador(Usuario usuario, Administrador ID_administrador, Restaurante restaurante) {
         this.setID_usuario(usuario.getID_usuario());
+
         this.restauranteDelGerente = restaurante;
     }
 
@@ -44,8 +44,6 @@ public class GerenteDelAdministrador extends Usuario {
 
     // setters
     // getters
-
-
     public Restaurante get_restaurante() {
         return restauranteDelGerente;
     }

@@ -1,20 +1,24 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "ADMINISTRADOR")
 public class Administrador extends Usuario {
 
     @Column(name = "NUMERO_RESTAURANTES", length = 9)
     private int numero_Restaurantes;
-    @OneToMany(mappedBy = "admin")
+
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Restaurante> restaurantes;
 
     @Column(name = "ACTIVO_ADMINISTRADOR", columnDefinition = "BOOLEAN")
@@ -22,18 +26,21 @@ public class Administrador extends Usuario {
 
     //constructor
     public Administrador() {
-
+        super();
+        this.numero_Restaurantes = 0;
+        this.restaurantes= new ArrayList<>();
+        this.setActivoAdministrador(true);
     }
 
 
     //methods
+
     public Administrador(Usuario usuario){
         super(usuario);
         this.numero_Restaurantes = 0;
         this.restaurantes= new ArrayList<Restaurante>();
         this.setActivoAdministrador(true);
     }
-
 
 
 
