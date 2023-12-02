@@ -1,5 +1,4 @@
-<!DOCTYPE>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -13,16 +12,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         body {
-            background-color: #F9EBEA ; /* Color de fondo naranja */
+            background-color: #F9EBEA ;
         }
 
         .container {
-            background-color: #F6002F; /* Color de fondo naranja */
-            padding-bottom: 20px; /* Espacio inferior del contenedor */
+            background-color: #F6002F;
+            padding-bottom: 20px;
         }
 
         .carousel-inner {
-            background-color: white; /* Color de fondo blanco en el carrusel */
+            background-color: white;
         }
         .footer {
             background-color: #F6002F;
@@ -46,14 +45,14 @@
         }
 
         .form-group label {
-            min-width: 150px; /* Ancho mínimo para las etiquetas de los campos */
+            min-width: 150px;
             margin-right: 10px;
             text-align: right;
         }
 
         input[type="text"],
         input[type="email"] {
-            width: 250px; /* Ancho de los campos de texto */
+            width: 250px;
         }
 
         label, input {
@@ -75,12 +74,12 @@
             color: black;
         }
         input[type="email"] {
-            width: 400px; /* Ancho ajustable según tus preferencias */
+            width: 400px;
         }
         .form-group {
             display: flex;
             align-items: center;
-            margin-bottom: 15px; /* Reducir el margen inferior para evitar mucho espacio entre campos */
+            margin-bottom: 15px;
         }
     </style>
 
@@ -88,13 +87,13 @@
 <body>
 <div class="container-fluid" style="background-color: #F6002F; margin-bottom: 20px;"> <!-- Se añade margin-bottom para generar espacio entre el navbar y el carrusel -->
     <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container"> <!-- Mover el contenedor dentro del navbar -->
+        <div class="container">
             <a class="navbar-brand" href="#" style="color: white;">App Gusto</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto"> <!-- Utilizando ml-auto para alinear a la derecha -->
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="administrador.html" style="color: white;">Inicio</a>                    </li>
                 </ul>
@@ -155,8 +154,11 @@
         <img src="./img/logo.jpg" alt="Imagen pequeña" style="width: 80px; height: 80px;">
     </div>
 
-    <div class="my-4"></div> <!-- Utilizamos la clase my-4 para crear un margen vertical -->
+    <div class="my-4"></div>
 </div>
+<!-- Agregar los scripts de Select2 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <!-- Pie de página -->
 <footer class="footer">
     <div class="container">
