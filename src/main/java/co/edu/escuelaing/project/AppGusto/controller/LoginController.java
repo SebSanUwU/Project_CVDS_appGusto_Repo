@@ -62,6 +62,13 @@ public class LoginController {
             Cookie cookie = new Cookie("authToken", session.getToken().toString());
             cookie.setHttpOnly(true);
             response.addCookie(cookie);
+            Usuario whois = usuariosServices.findByCorreo(parameters.get("email"));
+            if(whois instanceof Administrador){
+                return "redirect:/administrador/home";
+            }
+            else if (whois instanceof Comensal) {
+                return "redirect:/comensal/home";
+            }
             return "redirect:/login/protected/example";
         }
     }
@@ -74,7 +81,7 @@ public class LoginController {
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         response.addCookie(cookie);
-        return "index";
+        return "redirect:/";
     }
 
     @GetMapping("register")
@@ -82,7 +89,6 @@ public class LoginController {
         model.addAttribute("usuario", new Usuario());
         return "login/register";
     }
-
      @PostMapping("register")
      public String registerSubmit(@Valid @ModelAttribute("usuario") Usuario usuario,
                                   BindingResult result,

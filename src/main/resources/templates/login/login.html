@@ -62,42 +62,52 @@
 
             <div class="card" style="background-color: #FFF5EC;">
                 <div class="card-header">
-                    <h2 class="text-center">Login Form</h2>
+                    <h2 class="text-center">Login / Inciar Sesión </h2>
                 </div>
                 <div class="card-body">
-                    <form
-                            method="post"
-                            role="form"
-                            th:action="@{/login}"
-                            class="form-horizontal"
-                    >
-                        <div class="form-group mb-3">
-                            <label class="control-label"> Email</label>
-                            <input
-                                    type="text"
-                                    id="username"
-                                    name="username"
-                                    class="form-control"
-                                    placeholder="Enter email address"
-                            />
+                    <form action="" method="post">
+                        <div class="divider d-flex align-items-center my-4">
+                            <p class="text-center fw-bold mx-3 mb-0">Bienvenido!</p>
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label class="control-label"> Password</label>
-                            <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    class="form-control"
-                                    placeholder="Enter password"
-                            />
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <input type="email" id="email" name="email" class="form-control form-control-lg"
+                                   placeholder="Pon acá tu correo electrónico"/>
+                            <label class="form-label" for="email">Correo Electrónico</label>
                         </div>
-                        <div class="form-group mb-3">
-                            <button type="submit" class="btn btn-primary" >Submit</button>
-                            <span> Not registered ?
-                                <a th:href="@{/register}">Register/Signup here</a>
-                            </span>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-3">
+                            <input type="password" id="password" name="password" class="form-control form-control-lg"
+                                   placeholder="Pon acá tu contraseña"/>
+                            <label class="form-label" for="password">Contraseña</label>
                         </div>
+
+                        <ul style="color: rgba(255,0,0,0);">
+                            <li th:each="err : ${errors}" th:text="${err}" class="error" />
+                        </ul>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- Checkbox -->
+                            <div class="form-check mb-0">
+                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3"/>
+                                <label class="form-check-label" for="form2Example3">
+                                    Recuerdame
+                                </label>
+                            </div>
+                            <a href="#!" class="text-body">¿Olvidaste tu contraseña?</a>
+                        </div>
+
+                        <div class="text-center text-lg-start mt-4 pt-2">
+                            <button type="submit" class="btn btn-primary btn-lg"
+                                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Entra
+                            </button>
+                            <p class="small fw-bold mt-2 pt-1 mb-0">¿No tienes cuenta? <a href="/login/register"
+                                                                                              class="link-danger">Registrate/Resgister </a>
+                            </p>
+                        </div>
+
                     </form>
                 </div>
             </div>

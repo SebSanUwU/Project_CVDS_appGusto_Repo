@@ -54,22 +54,26 @@ public class BasicAuthInterceptor implements HandlerInterceptor {
                     sessionRepository.delete(session);
                     response.sendError(HttpServletResponse.SC_EXPECTATION_FAILED, "SessionTimeout");
                     return false;
-                } else if (path.startsWith("/login/protected")
-                        && !session.getUser().getRoles().contains(UserRole.ADMINISTRADOR)
-                        || !session.getUser().getRoles().contains(UserRole.COMENSAL)
-                        ||!session.getUser().getRoles().contains(UserRole.GERENTE) ) {
-                    response.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden");
-                    return false;
-                } else if (path.startsWith("login/protected/admin/**")
+                } else if (path.startsWith("/login/protected") &&
+                        !session.getUser().getRoles().contains(UserRole.ADMINISTRADOR)
+                        && !session.getUser().getRoles().contains(UserRole.COMENSAL)
+                        && !session.getUser().getRoles().contains(UserRole.GERENTE)){
+                        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Forbidden");
+                        return false;
+
+                } else if (path.startsWith("/administrador")
                         && session.getUser().getRoles().contains(UserRole.ADMINISTRADOR)) {
                     return true;
-                }else if (path.startsWith("login/protected/comensal/**")
+                }else if (path.startsWith("/comensal")
                         && session.getUser().getRoles().contains(UserRole.COMENSAL)) {
                     return true;
-                } else if (path.startsWith("login/protected/gerente/**")
+                } else if (path.startsWith("/gerente")
                         && session.getUser().getRoles().contains(UserRole.GERENTE)) {
                     return true;
-                }else {
+
+                }else if (path.startsWith("/login/protected")) {
+                    return true;
+                } else {
                     return false;
                 }
             } else {
@@ -81,6 +85,7 @@ public class BasicAuthInterceptor implements HandlerInterceptor {
             return false;
         }
     }
+
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
