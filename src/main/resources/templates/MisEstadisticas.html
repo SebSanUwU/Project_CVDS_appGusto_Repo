@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -40,17 +40,17 @@
             text-align: center; /* Centrar la imagen horizontalmente */
         }
         .centered-image img {
-            width: 300px; /* Reducir el tamaño de la imagen a la mitad */
-            height: 300px; /* Altura automática para mantener la proporción */
-            display: block; /* Para centrar la imagen */
-            margin: auto; /* Centrar la imagen horizontalmente */
+            width: 300px;
+            height: 300px;
+            display: block;
+            margin: auto;
         }
     </style>
 
 
 </head>
 <body>
-<div class="container-fluid" style="background-color: #F6002F; margin-bottom: 0px;"> <!-- Se añade margin-bottom para generar espacio entre el navbar y el carrusel -->
+<div class="container-fluid" style="background-color: #F6002F; margin-bottom: 0px;">
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container"> <!-- Mover el contenedor dentro del navbar -->
             <a class="navbar-brand" href="#" style="color: white;">App Gusto</a>
@@ -58,7 +58,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto"> <!-- Utilizando ml-auto para alinear a la derecha -->
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="/administrador/home" style="color: white;">Inicio</a>                    </li>
                 </ul>
@@ -89,11 +89,8 @@
     <img src="./img/logo.jpg" alt="Imagen pequeña" style="width: 80px; height: 80px;">
 </div>
 
-<div class="my-4"></div> <!-- Utilizamos la clase my-4 para crear un margen vertical -->
+<div class="my-4"></div>
 </div>
-<!-- Agregar los scripts de Select2 -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <!-- Pie de página fijo en la parte inferior -->
 <footer class="footer">
     <div class="container">
@@ -106,4 +103,3 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </html>
-
