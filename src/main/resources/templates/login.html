@@ -1,5 +1,4 @@
-<!DOCTYPE>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -15,7 +14,7 @@
 </head>
 <body style="background-color: #FFEDDE;">
 <nav class="navbar navbar-expand-lg navbar-light nav-fixed-top" style="background-color: #FE043C;">
-    <a class="navbar-brand h3  text-light" href="#">AppGusto</a>
+    <a class="navbar-brand h3  text-light" href="/">AppGusto</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon text-white"></span>
     </button>
@@ -25,7 +24,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FFFFFF" class="bi bi-person" viewBox="0 0 16 16">
                     <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z"/>
                 </svg>
-                <a class="nav-link text-light ml-2" href="#">Login</a>
+                <a class="nav-link text-light ml-2" href="/login">Login</a>
             </li>
 
             <li class="nav-item">
@@ -50,33 +49,63 @@
         </form>
     </div>
 </nav>
-<div class="container" style="position: relative; display: flex; height: 40%; padding:0;">
-    <img class="background-image" src="https://img.freepik.com/foto-gratis/autentica-pasta-italiana_24972-2334.jpg?w=1380&t=st=1700584297~exp=1700584897~hmac=c473bd635de0201ac9b20d6d3d8f272461075923d8ae8d1046067ac0853f3964" alt="Imagen de fondo" style="width: 100%; height: 100%; object-fit: cover;">
-    <div class="text-container" style="position: absolute; bottom: 0; left: 0; padding: 20px; color: white;">
-        <p class="h2 text-light">Descubre restaurante y deliciosa comida</p>
+<div class="container mt-5" >
+    <div class="row" >
+        <div class="col-md-6 offset-md-3" >
+
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Invalid Email or Password</div>
+            </div>
+            <div th:if="${param.logout}">
+                <div class="alert alert-success"> You have been logged out.</div>
+            </div>
+
+            <div class="card" style="background-color: #FFF5EC;">
+                <div class="card-header">
+                    <h2 class="text-center">Login Form</h2>
+                </div>
+                <div class="card-body">
+                    <form
+                            method="post"
+                            role="form"
+                            th:action="@{/login}"
+                            class="form-horizontal"
+                    >
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Email</label>
+                            <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    class="form-control"
+                                    placeholder="Enter email address"
+                            />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Password</label>
+                            <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-control"
+                                    placeholder="Enter password"
+                            />
+                        </div>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-primary" >Submit</button>
+                            <span> Not registered ?
+                                <a th:href="@{/register}">Register/Signup here</a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="container text-center mt-5">
-    <p class="h4 rounded " style="border-left: 10px solid #FE043C; padding-left: 10px; color:#192586">Variedad de restaurantes para tu almuerzo!</p>
-    <p class="text-muted text-center">
-        ¡Descubre la diversidad gastronómica para un almuerzo delicioso! Desde platos locales hasta opciones internacionales, nuestros restaurantes ofrecen sabores memorables. ¡Disfruta de una experiencia culinaria agradable en minutos!</p>
-</div>
-<div class="container text-center mt-5">
-    <p class="h4 rounded" style="border-left: 10px solid #FE043C; padding-left: 10px; color:#192586">
-        ¡Ordena tu comida en minutos!
-    </p>
-    <div class="d-flex justify-content-center mt-3">
-        <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="#EE1818" class="bi bi-stopwatch" viewBox="0 0 16 16">
-            <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5V5.6z"/>
-            <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64a.715.715 0 0 1 .012-.013l.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354a.512.512 0 0 1-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5zM8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3z"/>
-        </svg>
-    </div>
-    <p class="text-muted text-center mt-4">
-        Explora nuestra aplicación para pedir comida y disfruta de la variedad gastronómica en la comodidad de tu hogar. Desde platillos locales hasta opciones internacionales, nuestra entrega rápida garantiza que tu comida esté en tus manos en minutos. ¡Haz tu pedido ahora y experimenta la conveniencia a tu puerta!
-    </p>
 </div>
 
-<footer class="text-center text-white " style="background-color: #FFF5EC;">
+<footer class="text-center text-white fixed-bottom" style="background-color: #FFF5EC;">
     <!-- Grid container -->
     <div class="container pt-4" style="background-color: #FFF5EC;">
         <!-- Section: Social media -->

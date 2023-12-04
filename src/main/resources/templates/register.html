@@ -11,20 +11,89 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body style="background-image: url('https://img.freepik.com/foto-gratis/autentica-pasta-italiana_24972-2334.jpg?w=1380&t=st=1700584297~exp=1700584897~hmac=c473bd635de0201ac9b20d6d3d8f272461075923d8ae8d1046067ac0853f3964'); height: 900px; background-size: cover; background-repeat: no-repeat; background-color: #FFEDDE; background-position: center;">
-<div class="container rounded mx-auto my-5 p-4 d-flex align-items-center justify-content-center" style="background-color: rgba(255, 245, 236, 0.8); height: 80%; width: 90%;">
-    <div class="text-center">
-        <h1 class="mt-5">Crear una cuenta</h1>
-        <div class="box mt-5">
-            <form action="/" class="form-group" method="post">
-                <label for="id">Correo Electrónico:</label><br>
-                <input class="form-control" type="text" id="id" name="id" required><br>
-                <label for="fname">Nombre de Usuario:</label><br>
-                <input class="form-control" type="text" id="fname" name="fname" required><br>
-                <label for="lname">Contraseña:</label><br>
-                <input class="form-control" type="text" id="lname" name="lname" required>
-                <label for="role">Role:</label><br>
-                <input class="form-control" type="text" id="role" name="role">
-                <input class="btn btn-light mt-5" type="submit" value="Crear">
+<div class="container rounded mx-auto my-5 p-4 d-flex align-items-center justify-content-center">
+    <div class="card" style="background-color: rgba(255, 245, 236, 0.8)">
+        <div class="card-header">
+            <h2 class="text-center">Registration</h2>
+        </div>
+        <div th:if="${param.success}">
+            <div class="alert alert-info">
+                You have successfully registered our app!
+            </div>
+        </div>
+        <div class="card-body">
+            <form
+                    method="post"
+                    role="form"
+                    th:action="@{/register/save}"
+                    th:object="${user}"
+            >
+                <div class="form-group mb-3">
+                    <label class="form-label">First Name</label>
+                    <input
+                            class="form-control"
+                            id="firstName"
+                            name="firstName"
+                            placeholder="Enter first name"
+                            th:field="*{firstName}"
+                            type="text"
+                    />
+                    <p th:errors = "*{firstName}" class="text-danger"
+                       th:if="${#fields.hasErrors('firstName')}"></p>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Last Name</label>
+                    <input
+                            class="form-control"
+                            id="lastName"
+                            name="lastName"
+                            placeholder="Enter last name"
+                            th:field="*{lastName}"
+                            type="text"
+                    />
+                    <p th:errors = "*{lastName}" class="text-danger"
+                       th:if="${#fields.hasErrors('lastName')}"></p>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Email</label>
+                    <input
+                            class="form-control"
+                            id="email"
+                            name="email"
+                            placeholder="Enter email address"
+                            th:field="*{email}"
+                            type="email"
+                    />
+                    <p th:errors = "*{email}" class="text-danger"
+                       th:if="${#fields.hasErrors('email')}"></p>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Password</label>
+                    <input
+                            class="form-control"
+                            id="password"
+                            name="password"
+                            placeholder="Enter password"
+                            th:field="*{password}"
+                            type="password"
+                    />
+                    <p th:errors = "*{password}" class="text-danger"
+                       th:if="${#fields.hasErrors('password')}"></p>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="tipoUsuario">Tipo de Usuario:</label>
+                    <select id="tipoUsuario" name="tipoUsuario">
+                        <option value="administrador">Administrador</option>
+                        <option value="comensal">Comensal</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                    <span>Already registered? <a th:href="@{/login}">Login here</a></span>
+                </div>
             </form>
         </div>
     </div>

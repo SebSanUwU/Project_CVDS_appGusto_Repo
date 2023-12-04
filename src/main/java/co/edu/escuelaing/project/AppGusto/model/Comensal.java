@@ -3,31 +3,37 @@ package co.edu.escuelaing.project.AppGusto.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "COMENSAL")
-public class Comensal extends Usuario {
+public class Comensal extends User {
     @Transient
     private ArrayList<Platillo> carritoDeCompras;
 
     @OneToMany(mappedBy = "comensal")
-    private ArrayList<MetodoDePago> metodosDePago;
+    private List<MetodoDePago> metodosDePago;
     @OneToMany(mappedBy = "id_comensal")
-    private ArrayList<Pedido> pedidos;
+    private List<Pedido> pedidos;
 
     @Column(name = "PEDIDOS", length = 9)
     private int numeroPedidos;
     @Column(name = "ACTIVO_COMENSAL",columnDefinition = "BOOLEAN")
     private Boolean activeComensal;
 
+
     //constructor
     public Comensal() {
+        super();
+        this.numeroPedidos = 0;
+        this.metodosDePago = new ArrayList<>();
+        this.pedidos = new ArrayList<>();
+        this.activeComensal = true;
     }
 
 
     //Methods
-    public Comensal(Usuario usuario){
-        this.setID_usuario(usuario.getID_usuario());
+    public Comensal(User user){
         this.numeroPedidos = 0;
         this.metodosDePago = new ArrayList<MetodoDePago>();
         this.pedidos = new ArrayList<Pedido>();
@@ -67,6 +73,22 @@ public class Comensal extends Usuario {
     //getters
 
 
+    public List<MetodoDePago> getMetodosDePago() {
+        return metodosDePago;
+    }
+
+    public void setMetodosDePago(List<MetodoDePago> metodosDePago) {
+        this.metodosDePago = metodosDePago;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
     public ArrayList<Platillo> getCarritoDeCompras() {
         return carritoDeCompras;
     }
@@ -77,11 +99,5 @@ public class Comensal extends Usuario {
         return numeroPedidos;
     }
 
-    public ArrayList<MetodoDePago> getMetodosDePago() {
-        return metodosDePago;
-    }
 
-    public ArrayList<Pedido> getPedidos() {
-        return pedidos;
-    }
 }

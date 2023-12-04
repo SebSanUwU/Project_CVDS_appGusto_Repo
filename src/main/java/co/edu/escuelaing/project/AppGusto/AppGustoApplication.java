@@ -10,5 +10,4 @@ public class AppGustoApplication {
 		SpringApplication.run(AppGustoApplication.class, args);
 	}
 
-
 }
