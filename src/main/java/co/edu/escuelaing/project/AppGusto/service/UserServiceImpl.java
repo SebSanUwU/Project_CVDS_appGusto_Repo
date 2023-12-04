@@ -15,16 +15,16 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    private AdministradorRepository administradorRepository;
+    private final AdministradorRepository administradorRepository;
 
-    private ComensalRepository comensalRepository;
+    private final ComensalRepository comensalRepository;
 
-    private GerenteRepository gerenteRepository;
+    private final GerenteRepository gerenteRepository;
 
-    private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, AdministradorRepository administradorRepository, GerenteRepository gerenteRepository, ComensalRepository comensalRepository,
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserDto userDto) {
+    public User saveUser(UserDto userDto) {
         User user = new User();
         user.setName(userDto.getFirstName() + " " + userDto.getLastName());
         user.setEmail(userDto.getEmail());
@@ -52,10 +52,11 @@ public class UserServiceImpl implements UserService {
         }
         user.setRoles(Arrays.asList(role));
         userRepository.save(user);
+        return user;
     }
 
     @Override
-    public void saveAdministrador(UserDto userDto) {
+    public Administrador saveAdministrador(UserDto userDto) {
         Administrador administrador = new Administrador();
         administrador.setName(userDto.getFirstName() + " " + userDto.getLastName());
         administrador.setEmail(userDto.getEmail());
@@ -70,10 +71,12 @@ public class UserServiceImpl implements UserService {
         administrador.setRoles(Arrays.asList(role));
 
         administradorRepository.save(administrador);
+
+        return administrador;
     }
 
     @Override
-    public void saveGerente(UserDto userDto) {
+    public GerenteDelAdministrador saveGerente(UserDto userDto) {
         GerenteDelAdministrador gerenteDelAdministrador = new GerenteDelAdministrador();
         gerenteDelAdministrador.setName(userDto.getFirstName() + " " + userDto.getLastName());
         gerenteDelAdministrador.setEmail(userDto.getEmail());
@@ -88,10 +91,12 @@ public class UserServiceImpl implements UserService {
         gerenteDelAdministrador.setRoles(Arrays.asList(role));
 
         gerenteRepository.save(gerenteDelAdministrador);
+
+        return gerenteDelAdministrador;
     }
 
     @Override
-    public void saveComensal(UserDto userDto) {
+    public Comensal saveComensal(UserDto userDto) {
         Comensal comensal = new Comensal();
         comensal.setName(userDto.getFirstName() + " " + userDto.getLastName());
         comensal.setEmail(userDto.getEmail());
@@ -106,6 +111,7 @@ public class UserServiceImpl implements UserService {
         comensal.setRoles(Arrays.asList(role));
 
         comensalRepository.save(comensal);
+        return comensal;
     }
 
     @Override
