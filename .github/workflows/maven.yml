@@ -1,9 +1,10 @@
-name: Build and Test Java Spring Boot Application 
+name: Build and deploy JAR app to Azure Web App - AppGusto
  
 on:
   push:
     branches:
       - main
+      - test
   workflow_dispatch:
 
 jobs:
