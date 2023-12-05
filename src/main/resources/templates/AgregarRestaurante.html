@@ -12,16 +12,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         body {
-            background-color: #F9EBEA ; /* Color de fondo naranja */
+            background-color: #F9EBEA ;
         }
 
         .container {
-            background-color: #F6002F; /* Color de fondo naranja */
-            padding-bottom: 20px; /* Espacio inferior del contenedor */
+            background-color: #F6002F;
+            padding-bottom: 20px;
         }
 
         .carousel-inner {
-            background-color: white; /* Color de fondo blanco en el carrusel */
+            background-color: white;
         }
         .footer {
             background-color: #F6002F;
@@ -45,14 +45,14 @@
         }
 
         .form-group label {
-            min-width: 150px; /* Ancho mínimo para las etiquetas de los campos */
+            min-width: 150px;
             margin-right: 10px;
             text-align: right;
         }
 
         input[type="text"],
         input[type="email"] {
-            width: 250px; /* Ancho de los campos de texto */
+            width: 250px;
         }
 
         label, input {
@@ -74,12 +74,12 @@
             color: black;
         }
         input[type="email"] {
-            width: 400px; /* Ancho ajustable según tus preferencias */
+            width: 400px;
         }
         .form-group {
             display: flex;
             align-items: center;
-            margin-bottom: 15px; /* Reducir el margen inferior para evitar mucho espacio entre campos */
+            margin-bottom: 15px;
         }
     </style>
 
@@ -87,13 +87,13 @@
 <body>
 <div class="container-fluid" style="background-color: #F6002F; margin-bottom: 20px;"> <!-- Se añade margin-bottom para generar espacio entre el navbar y el carrusel -->
     <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container"> <!-- Mover el contenedor dentro del navbar -->
+        <div class="container">
             <a class="navbar-brand" href="#" style="color: white;">App Gusto</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto"> <!-- Utilizando ml-auto para alinear a la derecha -->
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="administrador.html" style="color: white;">Inicio</a>                    </li>
                 </ul>
@@ -105,7 +105,11 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner" style="background-color: white;"> <!-- Agregamos el color de fondo al contenedor del carrusel -->
         <div class="carousel-item active text-center">
-            <img src="./img/chef.jpg" alt="Imagen reducida a la mitad" style="width: 20%; height: auto; display: block; margin: auto;">
+            <div class="centered-image">
+                <a href="https://ibb.co/FsyQsWR">
+                    <img src="https://i.ibb.co/mv2nvBf/chef.jpg" alt="chef" border="0" style="width: 300px; height: 450px;">
+                </a>
+            </div>
             <h1>¡¡¡Registra Tu Restaurante!!!</h1>
             <p>Tu crecimiento es importante para nosotros tu AppGusto. Incrementa tus ventas con todos los recursos que tenemos para tu restaurante.</p>
             <p><strong>¡Vender por AppGusto es de lo mejor!</strong></p>
@@ -132,10 +136,8 @@
                     <label for="direccion">Dirección del Restaurante:</label><br>
                     <input class="form-control col-8 mx-auto" type="text" id="direccion" name="direccion" required><br>
 
-                    <label for="documentos">Carga los documentos de tu Restaurante:</label><br>
-                    <div class="text-center">
-                        <input class="form-control-file d-inline-block" type="file" id="documentos" name="documentos" required>
-                    </div>
+                    <label for="nit">NIT del Restaurante:</label><br>
+                    <input class="form-control col-8 mx-auto" type="text" id="nit" name="nit" required><br>
 
                     <label for="verificado">¿Tu Restaurante está verificado?</label><br>
                     <select id="verificado" name="verificado" required>
@@ -151,10 +153,9 @@
     </div>
     <!-- Imagen centrada -->
     <div class="text-center mt-4">
-        <img src="./img/logo.jpg" alt="Imagen pequeña" style="width: 80px; height: 80px;">
+        <a href="https://ibb.co/BP6krZQ"><img src="https://i.ibb.co/BP6krZQ/logo.jpg" alt="logo" border="0" width= 100 px height=100 px></a>
     </div>
-
-    <div class="my-4"></div> <!-- Utilizamos la clase my-4 para crear un margen vertical -->
+    <div class="my-4"></div>
 </div>
 <!-- Agregar los scripts de Select2 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
