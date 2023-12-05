@@ -3,6 +3,7 @@ package co.edu.escuelaing.project.AppGusto.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -22,7 +23,7 @@ public class Platillo {
             name = "INGREDIENTE_ESTA_EN", joinColumns = @JoinColumn(name = "PLATILLO", referencedColumnName = "ID_platillo"),
             inverseJoinColumns = @JoinColumn(name = "INGREDIENTE", referencedColumnName = "ID_ingrediente")
     )
-    private ArrayList<Ingrediente> ingredientes;
+    private List<Ingrediente> ingredientes;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
@@ -97,7 +98,7 @@ public class Platillo {
         return nombrePlatillo;
     }
 
-    public ArrayList<Ingrediente> getIngredientes() {
+    public List<Ingrediente> getIngredientes() {
         return ingredientes;
     }
 

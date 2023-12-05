@@ -10,11 +10,14 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "ADMINISTRADOR")
-public class Administrador extends User {
+public class Administrador extends Usuario {
+
     @Column(name = "NUMERO_RESTAURANTES", length = 9)
     private int numero_Restaurantes;
+
     @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Restaurante> restaurantes;
+
     @Column(name = "ACTIVO_ADMINISTRADOR", columnDefinition = "BOOLEAN")
     private boolean activoAdministrador;
 
@@ -28,7 +31,9 @@ public class Administrador extends User {
 
 
     //methods
-    public Administrador(User user){
+
+    public Administrador(Usuario usuario){
+        super(usuario);
         this.numero_Restaurantes = 0;
         this.restaurantes= new ArrayList<Restaurante>();
         this.setActivoAdministrador(true);
