@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(UserDto userDto) {
         User user = new User();
+        user.setId(userDto.getId());
         user.setName(userDto.getFirstName() + " " + userDto.getLastName());
         user.setEmail(userDto.getEmail());
         // encrypt the password using spring security
@@ -58,6 +59,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Administrador saveAdministrador(UserDto userDto) {
         Administrador administrador = new Administrador();
+        administrador.setId(userDto.getId());
         administrador.setName(userDto.getFirstName() + " " + userDto.getLastName());
         administrador.setEmail(userDto.getEmail());
         // encrypt the password using spring security
@@ -78,6 +80,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public GerenteDelAdministrador saveGerente(UserDto userDto) {
         GerenteDelAdministrador gerenteDelAdministrador = new GerenteDelAdministrador();
+        gerenteDelAdministrador.setId(userDto.getId());
         gerenteDelAdministrador.setName(userDto.getFirstName() + " " + userDto.getLastName());
         gerenteDelAdministrador.setEmail(userDto.getEmail());
         // encrypt the password using spring security
@@ -98,6 +101,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Comensal saveComensal(UserDto userDto) {
         Comensal comensal = new Comensal();
+        comensal.setId(userDto.getId());
         comensal.setName(userDto.getFirstName() + " " + userDto.getLastName());
         comensal.setEmail(userDto.getEmail());
         // encrypt the password using spring security
