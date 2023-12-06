@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - test
+      - back-support
   workflow_dispatch:
 
 jobs:
