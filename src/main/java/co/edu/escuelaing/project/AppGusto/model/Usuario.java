@@ -3,8 +3,6 @@ package co.edu.escuelaing.project.AppGusto.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.scheduling.support.SimpleTriggerContext;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
 //import org.springframework.security.core.userdetails.UserDetails;
@@ -12,8 +10,8 @@ import org.springframework.scheduling.support.SimpleTriggerContext;
 import java.util.*;
 //import lombok.Builder;
 
-//@Builder
-//@AllArgsConstructor
+@Builder
+@AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
@@ -29,9 +27,7 @@ public class Usuario {
     private String apellidos;
     @Column(name = "CORREO", unique = true, nullable = false, length = 70)
     private String correo;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "FECHA")
-    private Date fecha;
+
     @Column(name = "NUMERO_INICIO_DE_SESION", length = 9)
     private int numero_Inicio_de_sesion;
     @Column(name = "CONTRASENA")
@@ -54,47 +50,32 @@ public class Usuario {
     //Constructors
     public Usuario() {
     }
-
-    public Usuario(String nombres,
-                   String apellidos,
-                   String username,
-                   String correo,
-                   Date fecha, String contrasena) {
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.username = username;
-        this.correo = correo;
-        this.fecha = fecha;
-        this.numero_Inicio_de_sesion = 1;
-        this.contrasena = contrasena;
-        this.activo = true;
-    }
-
     public Usuario(Usuario usuario) {
+        this.ID_usuario=usuario.getID_usuario();
+        this.username=usuario.getUsername();
         this.nombres = usuario.getNombres();
         this.apellidos = usuario.getApellidos();
         this.username = usuario.getUsername();
         this.correo = usuario.getCorreo();
-        this.fecha = usuario.getFecha();
         this.numero_Inicio_de_sesion = 1;
         this.contrasena = usuario.getContrasena();
         this.activo = true;
     }
 
-    public void crearUsuario(String nombres,
+    public Usuario(String nombres,
                    String apellidos,
                    String username,
                    String correo,
-                   Date fecha, String contrasena) {
+                   String contrasena) {
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.username = username;
         this.correo = correo;
-        this.fecha = fecha;
         this.numero_Inicio_de_sesion = 1;
         this.contrasena = contrasena;
         this.activo = true;
     }
+
     //Methods
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -171,9 +152,6 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
 
     public void setNumero_Inicio_de_sesion(int numero_Inicio_de_sesion) {
         this.numero_Inicio_de_sesion = numero_Inicio_de_sesion;
@@ -206,21 +184,14 @@ public class Usuario {
     public String getApellidos() {
         return apellidos;
     }
-
     public boolean isActivo() {
         return activo;
     }
     public Long getID_usuario() {
         return ID_usuario;
     }
-
-
     public String getCorreo() {
         return correo;
-    }
-
-    public Date getFecha() {
-        return fecha;
     }
 
     public int getNumero_Inicio_de_sesion() {

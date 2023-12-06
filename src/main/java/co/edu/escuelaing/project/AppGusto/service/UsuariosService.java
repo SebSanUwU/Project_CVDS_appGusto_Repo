@@ -33,7 +33,6 @@ public class UsuariosService {
     private final UsuarioRepository usuarioRepository;
 
 
-
     @Autowired
     public UsuariosService(AdministradorRepository administradorRepository,
                            ComensalRepository comensalRepository,
@@ -69,9 +68,6 @@ public class UsuariosService {
         }
     }
 
-
-
-
     // Add
     public Administrador addAdministrador(Administrador administrador){
         return administradorRepository.save(administrador);
@@ -96,10 +92,6 @@ public class UsuariosService {
     public GerenteDelAdministrador getGerente(Long gerenteID){
         return gerenteRepository.getReferenceById(gerenteID);
     }
-    public Usuario getUsuario(Long usuarioID){
-        return usuarioRepository.getReferenceById(usuarioID);
-    }
-
 
     //Get All
     public List<Administrador> getAllAdministradores(){
@@ -201,6 +193,6 @@ public class UsuariosService {
             System.out.println("ERRROOOOOOOOOOOOOOOOOOOOOOOOOrrrrrrrrr");
             e.printStackTrace();
         }
-
     }
+
 }

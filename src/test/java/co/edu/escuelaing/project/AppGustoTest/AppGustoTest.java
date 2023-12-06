@@ -1,12 +1,12 @@
 package co.edu.escuelaing.project.AppGustoTest;
 
 
-import co.edu.escuelaing.project.AppGusto.dto.UserDto;
+
 import co.edu.escuelaing.project.AppGusto.model.Administrador;
 import co.edu.escuelaing.project.AppGusto.model.Comensal;
 import co.edu.escuelaing.project.AppGusto.model.GerenteDelAdministrador;
+import co.edu.escuelaing.project.AppGusto.model.Usuario;
 import co.edu.escuelaing.project.AppGusto.repository.*;
-import co.edu.escuelaing.project.AppGusto.service.UserServiceImpl;
 import co.edu.escuelaing.project.AppGusto.service.UsuariosService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,11 +16,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import static org.mockito.BDDMockito.given;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.willDoNothing;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,70 +28,56 @@ public class AppGustoTest {
     @InjectMocks
     UsuariosService usuariosService;
 
-    @InjectMocks
-    UserServiceImpl userServiceImpl;
-    @Mock
-    UserRepository userRepository;
     @Mock
     AdministradorRepository administradorRepository;
     @Mock
     GerenteRepository gerenteRepository;
     @Mock
     ComensalRepository comensalRepository;
-    @Mock
-    RoleRepository roleRepository;
-    @Mock
-    @MockBean
-    PasswordEncoder passwordEncoder;
 
-    private UserDto userDtoTestService;
 
-    private UserDto userDto;
+    private Usuario usuario;
 
 
     @BeforeEach
     public void setup(){
-        userDtoTestService = UserDto.builder()
-                .id(1L)
-                .firstName("Juan")
-                .lastName("Camargo")
-                .email("juancamargo@mail.com")
-                .password("Dev123")
+        usuario = Usuario.builder()
+                .ID_usuario(1L)
+                .username("SebSanUwU")
+                .nombres("Juan")
+                .apellidos("Camargo")
+                .correo("juancamargo@mail.com")
+                .numero_Inicio_de_sesion(1)
+                .contrasena("Dev123")
+                .activo(true)
                 .build();
-
-        userDto = UserDto.builder()
-                .id(1L)
-                .firstName("Juan")
-                .lastName("Camargo")
-                .email("juancamargo@mail.com")
-                .password("Dev123")
-                .build();
-
     }
+
+
 
     @DisplayName("Crear un administrador no resgistrado")
     @Test
     public void crearAdminNoResgistrado_thenReturnAdministradorObject(){
+        Administrador administrador = new Administrador(usuario);
         // given - precondition or setup
-        Administrador administrador;
-        administrador = userServiceImpl.saveAdministrador(userDtoTestService);
+        usuariosService.addAdministrador(administrador);
         // when -  action or the behaviour that we are going test
-        when(usuariosService.getAdministrador(administrador.getId())).thenReturn(administrador);
+        when(usuariosService.getAdministrador(administrador.getID_usuario())).thenReturn(administrador);
         // then - verify the output
-        Administrador saveAdministrador = usuariosService.getAdministrador(administrador.getId());
+        Administrador saveAdministrador = usuariosService.getAdministrador(administrador.getID_usuario());
         assertThat(saveAdministrador).isNotNull();
     }
 
     @DisplayName("Crear un comensal no resgistrado")
     @Test
     public void crearComensalNoResgistrado_thenReturnComensalObject(){
+        Comensal comensal = new Comensal(usuario);
         // given - precondition or setup
-        Comensal comensal;
-        comensal = userServiceImpl.saveComensal(userDtoTestService);
+        usuariosService.addComensal(comensal);
         // when -  action or the behaviour that we are going test
-        when(usuariosService.getComensal(comensal.getId())).thenReturn(comensal);
+        when(usuariosService.getComensal(comensal.getID_usuario())).thenReturn(comensal);
         // then - verify the output
-        Comensal saveComensal = usuariosService.getComensal(comensal.getId());
+        Comensal saveComensal = usuariosService.getComensal(comensal.getID_usuario());
         assertThat(saveComensal).isNotNull();
     }
 
@@ -99,36 +85,38 @@ public class AppGustoTest {
     @Test
     public void crearGerenteNoResgistrado_thenReturnGerenteObject(){
         // given - precondition or setup
-        GerenteDelAdministrador gerenteDelAdministrador;
-        gerenteDelAdministrador = userServiceImpl.saveGerente(userDtoTestService);
+        GerenteDelAdministrador gerenteDelAdministrador = new GerenteDelAdministrador(usuario);
+        usuariosService.addGerente(gerenteDelAdministrador);
         // when -  action or the behaviour that we are going test
-        when(usuariosService.getGerente(gerenteDelAdministrador.getId())).thenReturn(gerenteDelAdministrador);
+        when(usuariosService.getGerente(gerenteDelAdministrador.getID_usuario())).thenReturn(gerenteDelAdministrador);
         // then - verify the output
-        GerenteDelAdministrador saveGerente = usuariosService.getGerente(gerenteDelAdministrador.getId());
+        GerenteDelAdministrador saveGerente = usuariosService.getGerente(gerenteDelAdministrador.getID_usuario());
         assertThat(saveGerente).isNotNull();
-
     }
 
     @DisplayName("Consulta de usuarios registrados")
     @Test
     public void ConsultarUsuariosDB_thenReturnUserObject(){
         // given - precondition or setup
-        Administrador admin = userServiceImpl.saveAdministrador(userDto);
-        GerenteDelAdministrador gerente = userServiceImpl.saveGerente(userDto);
-        Comensal comensal = userServiceImpl.saveComensal(userDto);
+        Administrador admin = new Administrador(usuario);
+        GerenteDelAdministrador gerente = new GerenteDelAdministrador(usuario);
+        Comensal comensal = new Comensal(usuario);
 
+        usuariosService.addAdministrador(admin);
+        usuariosService.addGerente(gerente);
+        usuariosService.addComensal(comensal);
 
         // when -  action or the behaviour that we are going test
-        when(usuariosService.getAdministrador(admin.getId())).thenReturn(admin);
-        when(usuariosService.getGerente(gerente.getId())).thenReturn(gerente);
-        when(usuariosService.getComensal(comensal.getId())).thenReturn(comensal);
+        when(usuariosService.getAdministrador(admin.getID_usuario())).thenReturn(admin);
+        when(usuariosService.getGerente(gerente.getID_usuario())).thenReturn(gerente);
+        when(usuariosService.getComensal(comensal.getID_usuario())).thenReturn(comensal);
         // then - verify the output
-        Administrador queryAdmin = usuariosService.getAdministrador(admin.getId());
-        GerenteDelAdministrador queryGerente = usuariosService.getGerente(gerente.getId());
-        Comensal queryComensal = usuariosService.getComensal(comensal.getId());
-        assertEquals("",admin.getId(),queryAdmin.getId());
-        assertEquals("",gerente.getId(),queryGerente.getId());
-        assertEquals("",comensal.getId(),queryComensal.getId());
+        Administrador queryAdmin = usuariosService.getAdministrador(admin.getID_usuario());
+        GerenteDelAdministrador queryGerente = usuariosService.getGerente(gerente.getID_usuario());
+        Comensal queryComensal = usuariosService.getComensal(comensal.getID_usuario());
+        assertEquals("",admin.getID_usuario(),queryAdmin.getID_usuario());
+        assertEquals("",gerente.getID_usuario(),queryGerente.getID_usuario());
+        assertEquals("",comensal.getID_usuario(),queryComensal.getID_usuario());
     }
 
     @DisplayName("Consulta de usuarios No registrados")
@@ -137,16 +125,35 @@ public class AppGustoTest {
         // given - precondition or setup
 
         // when -  action or the behaviour that we are going test
-        when(usuariosService.getAdministrador(userDto.getId())).thenReturn(null);
-        when(usuariosService.getGerente(userDto.getId())).thenReturn(null);
-        when(usuariosService.getComensal(userDto.getId())).thenReturn(null);
+        when(usuariosService.getAdministrador(usuario.getID_usuario())).thenReturn(null);
+        when(usuariosService.getGerente(usuario.getID_usuario())).thenReturn(null);
+        when(usuariosService.getComensal(usuario.getID_usuario())).thenReturn(null);
         // then - verify the output
-        Administrador queryAdmin = usuariosService.getAdministrador(userDto.getId());
-        GerenteDelAdministrador queryGerente = usuariosService.getGerente(userDto.getId());
-        Comensal queryComensal = usuariosService.getComensal(userDto.getId());
+        Administrador queryAdmin = usuariosService.getAdministrador(usuario.getID_usuario());
+        GerenteDelAdministrador queryGerente = usuariosService.getGerente(usuario.getID_usuario());
+        Comensal queryComensal = usuariosService.getComensal(usuario.getID_usuario());
 
         assertThat(queryAdmin).isNull();
         assertThat(queryGerente).isNull();
         assertThat(queryComensal).isNull();
     }
+
+    @DisplayName("Eliminar a un usuario registrado")
+    @Test
+    public void EliminarUsuarioEnDB_thenReturnUserObject(){
+        // given - precondition or setup
+        willDoNothing().given(administradorRepository).deleteById(usuario.getID_usuario());
+        willDoNothing().given(comensalRepository).deleteById(usuario.getID_usuario());
+        willDoNothing().given(gerenteRepository).deleteById(usuario.getID_usuario());
+        // when -  action or the behaviour that we are going test
+        usuariosService.deleteAdminstrador(usuario.getID_usuario());
+        usuariosService.deleteComensal(usuario.getID_usuario());
+        usuariosService.deleteGerente(usuario.getID_usuario());
+        // then - verify the output
+        verify(administradorRepository,times(1)).deleteById(usuario.getID_usuario());
+        verify(gerenteRepository,times(1)).deleteById(usuario.getID_usuario());
+        verify(comensalRepository,times(1)).deleteById(usuario.getID_usuario());
+    }
+
+
 }

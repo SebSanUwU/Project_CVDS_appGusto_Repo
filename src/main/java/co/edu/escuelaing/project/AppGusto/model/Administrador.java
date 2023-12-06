@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Getter
 @Setter
 @Entity
@@ -23,7 +24,6 @@ public class Administrador extends Usuario {
 
     //constructor
     public Administrador() {
-        super();
         this.numero_Restaurantes = 0;
         this.restaurantes= new ArrayList<>();
         this.setActivoAdministrador(true);

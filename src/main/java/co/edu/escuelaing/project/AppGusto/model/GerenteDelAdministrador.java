@@ -29,17 +29,21 @@ public class GerenteDelAdministrador extends Usuario {
                                    String correo,
                                    Date fecha, String contrasena) {
 
-        super( nombres,apellidos,username,  correo,  fecha,  contrasena);
+        super( nombres,apellidos,username,  correo,  contrasena);
         this.restauranteDelGerente = restaurante;
     }
 
     public GerenteDelAdministrador(Usuario usuario, Administrador ID_administrador, Restaurante restaurante) {
+        super(usuario);
         this.setID_usuario(usuario.getID_usuario());
-
         this.restauranteDelGerente = restaurante;
     }
 
-
+    public GerenteDelAdministrador(Usuario usuario){
+        super(usuario);
+        this.setID_usuario(null);
+        this.restauranteDelGerente = null;
+    }
 
 
     // setters
