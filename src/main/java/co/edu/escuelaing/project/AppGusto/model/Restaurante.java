@@ -3,6 +3,7 @@ package co.edu.escuelaing.project.AppGusto.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -22,7 +23,7 @@ public class Restaurante {
     private Administrador admin;
 
     @OneToMany(mappedBy = "ID_restaurante")
-    private ArrayList<Platillo> platillos;
+    private List<Platillo> platillos;
 
     @Column(name = "NOMBRE",length = 50)
     private String nombre;
@@ -62,6 +63,7 @@ public class Restaurante {
         this.platillos = new ArrayList<Platillo>();
         this.nombreMarca = nombreMarca;
         this.nombreLegal = nombreLegal;
+        this.gerente = null;
 
 
     }
@@ -86,6 +88,7 @@ public class Restaurante {
     }
 
     //setters
+
 
 
     public void setNombreMarca(String nombreMarca) {
@@ -168,7 +171,7 @@ public class Restaurante {
     }
 
 
-    public ArrayList<Platillo> getPlatillos() {
+    public List<Platillo> getPlatillos() {
         return platillos;
     }
 }

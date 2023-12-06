@@ -3,6 +3,7 @@ package co.edu.escuelaing.project.AppGusto.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,7 +15,7 @@ public class Ingrediente {
     private Long ID_ingrediente;
 
     @ManyToMany(mappedBy = "ingredientes")
-    private ArrayList<Platillo> platillos = new ArrayList<Platillo>();
+    private List<Platillo> platillos = new ArrayList<Platillo>();
 
     @Column(name = "NOMBRE")
     private String nombre;
@@ -60,7 +61,7 @@ public class Ingrediente {
         return costo;
     }
 
-    public ArrayList<Platillo> getPlatillos() {
+    public List<Platillo> getPlatillos() {
         return platillos;
     }
 }
