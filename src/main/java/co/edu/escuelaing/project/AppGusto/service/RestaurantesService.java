@@ -63,6 +63,13 @@ public class RestaurantesService {
         return ingredienteRepository.findAll();
     }
 
+    //Get by Owner
+
+    public List<Restaurante> getMyRestaurantes(Administrador administrador) {
+        // Utiliza el método del repositorio para obtener todos los restaurantes asociados a un administrador
+        return restauranteRepository.findByAdmin(administrador);
+    }
+
 
     //Update
     public Restaurante updateRestaurante(Restaurante restaurante){
@@ -74,6 +81,7 @@ public class RestaurantesService {
     public Ingrediente updateIngrediente(Ingrediente ingrediente){
         return ingredienteRepository.save(ingrediente);
     }
+
     //Delete
     public void deleteRestaurante(Long restauranteId) {
         restauranteRepository.deleteById(Long.valueOf(restauranteId));
