@@ -1,19 +1,19 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Builder
 @Entity
 @Table (name = "PLATILLO")
 public class Platillo {
     @Id
-    @Column(name = "ID_PLATILLO")
-    private String ID_platillo;
-
-
+    @Column(name = "ID_RESTAURANTE",length = 100)
+    private Long ID_platillo;
     @ManyToOne
     @JoinColumn(name= "RESTAURANTE")
     private Restaurante ID_restaurante;
@@ -38,28 +38,16 @@ public class Platillo {
     @Column(name = "NOMBRE", length = 20)
     private String nombrePlatillo;
 
-    public Platillo() {
-
-    }
-
-    /**
-     * Solo un restaurante puede crear un platillo
-     * @param platillo
-     * @param restaurante
-     */
-    public Platillo(int platillo, Restaurante restaurante, String nombre) {
-        UUID uuid = UUID.randomUUID();
-        this.ID_platillo = uuid.toString();
-        this.ID_restaurante = restaurante;
-        this.costoPlatillo = platillo;
-        this.nombrePlatillo= nombre;
-    }
-
-
-
-    public void setID_platillo(String ID_platillo) {
+    public Platillo(Long ID_platillo, Restaurante ID_restaurante, List<Ingrediente> ingredientes, ArrayList<Pedido> pedidos, int costoPlatillo, String nombrePlatillo) {
         this.ID_platillo = ID_platillo;
+        this.ID_restaurante = ID_restaurante;
+        this.ingredientes = ingredientes;
+        this.pedidos = pedidos;
+        this.costoPlatillo = costoPlatillo;
+        this.nombrePlatillo = nombrePlatillo;
     }
+
+
 
     public void setID_restaurante(Restaurante ID_restaurante) {
         this.ID_restaurante = ID_restaurante;
@@ -81,9 +69,16 @@ public class Platillo {
         this.pedidos = pedidos;
     }
 
-
-    public String getID_platillo() {
+    public Long getID_platillo() {
         return ID_platillo;
+    }
+
+    public void setID_platillo(Long ID_platillo) {
+        this.ID_platillo = ID_platillo;
+    }
+
+    public void setIngredientes(List<Ingrediente> ingredientes) {
+        this.ingredientes = ingredientes;
     }
 
     public Restaurante getID_restaurante() {

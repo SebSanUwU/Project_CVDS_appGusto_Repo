@@ -1,11 +1,13 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Builder
 @Entity
 @Table(name = "RESTAURANTE")
 public class Restaurante {
@@ -25,8 +27,6 @@ public class Restaurante {
     @OneToMany(mappedBy = "ID_restaurante")
     private List<Platillo> platillos;
 
-    @Column(name = "NOMBRE",length = 50)
-    private String nombre;
     @Column(name = "CALIFICACION",length = 6)
     private float calificacion;
     @Column(name = "DIRECCION",length = 20)
@@ -51,6 +51,19 @@ public class Restaurante {
 
     }
 
+    public Restaurante(Long ID_restaurante, CategoriaEnum categoria, Administrador admin, List<Platillo> platillos, float calificacion, String direccion, String documentos, boolean verificado, String nombreMarca, String nombreLegal, GerenteDelAdministrador gerente) {
+        this.ID_restaurante = ID_restaurante;
+        this.categoria = categoria;
+        this.admin = admin;
+        this.platillos = platillos;
+        this.calificacion = calificacion;
+        this.direccion = direccion;
+        this.documentos = documentos;
+        this.verificado = verificado;
+        this.nombreMarca = nombreMarca;
+        this.nombreLegal = nombreLegal;
+        this.gerente = gerente;
+    }
 
     public Restaurante(CategoriaEnum ID_categoria,
                        String direccion,
@@ -64,8 +77,6 @@ public class Restaurante {
         this.nombreMarca = nombreMarca;
         this.nombreLegal = nombreLegal;
         this.gerente = null;
-
-
     }
 
     public Restaurante(CategoriaEnum categoria,
@@ -83,14 +94,9 @@ public class Restaurante {
         this.platillos = new ArrayList<Platillo>();
         this.nombreMarca = nombreMarca;
         this.nombreLegal = nombreLegal;
-
-
     }
 
     //setters
-
-
-
     public void setNombreMarca(String nombreMarca) {
         this.nombreMarca = nombreMarca;
     }
@@ -134,6 +140,19 @@ public class Restaurante {
 
     //getters
 
+
+    public void setPlatillos(List<Platillo> platillos) {
+        this.platillos = platillos;
+    }
+
+    public GerenteDelAdministrador getGerente() {
+        return gerente;
+    }
+
+    public void setGerente(GerenteDelAdministrador gerente) {
+        this.gerente = gerente;
+    }
+
     public String getNombreMarca() {
         return nombreMarca;
     }
@@ -173,5 +192,22 @@ public class Restaurante {
 
     public List<Platillo> getPlatillos() {
         return platillos;
+    }
+
+    @Override
+    public String toString() {
+        return "Restaurante{" +
+                "ID_restaurante=" + ID_restaurante +
+                ", categoria=" + categoria +
+                ", admin=" + admin +
+                ", platillos=" + platillos +
+                ", calificacion=" + calificacion +
+                ", direccion='" + direccion + '\'' +
+                ", documentos='" + documentos + '\'' +
+                ", verificado=" + verificado +
+                ", nombreMarca='" + nombreMarca + '\'' +
+                ", nombreLegal='" + nombreLegal + '\'' +
+                ", gerente=" + gerente +
+                '}';
     }
 }
