@@ -1,13 +1,11 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Getter
 @Setter
@@ -26,7 +24,6 @@ public class Administrador extends Usuario {
 
     //constructor
     public Administrador() {
-        super();
         this.numero_Restaurantes = 0;
         this.restaurantes= new ArrayList<>();
         this.setActivoAdministrador(true);
@@ -41,7 +38,6 @@ public class Administrador extends Usuario {
         this.restaurantes= new ArrayList<Restaurante>();
         this.setActivoAdministrador(true);
     }
-
 
 
     //setters
@@ -79,5 +75,4 @@ public class Administrador extends Usuario {
     public List<Restaurante> getRestaurantes() {
         return restaurantes;
     }
-
 }

@@ -22,9 +22,7 @@ import java.time.LocalDate;
 public class LoginController {
 
     private static final String LOGIN_PAGE = "login/login";
-
     private final UsuarioRepository userRepository;
-
     private final SessionRepository sessionRepository;
     private final UsuariosService usuariosServices;
 
@@ -104,8 +102,6 @@ public class LoginController {
 
 
          LocalDate fechaLocal = LocalDate.now();
-         Date fechaDate = java.sql.Date.valueOf(fechaLocal);
-         usuario.setFecha(fechaDate);
          usuario.setContrasena(UsuariosService.encodePassword(usuario.getContrasena()));
 
 

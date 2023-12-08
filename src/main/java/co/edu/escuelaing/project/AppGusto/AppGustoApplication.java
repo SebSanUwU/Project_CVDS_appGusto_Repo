@@ -19,16 +19,13 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication
 @Slf4j
 public class AppGustoApplication {
-	private final ConfigurationService configurationService;
-
 	private final UsuarioRepository userRepository;
 
 	@Autowired
 	public AppGustoApplication(
-			ConfigurationService configurationService,
 			UsuarioRepository userRepository
 	) {
-		this.configurationService = configurationService;
+
 		this.userRepository = userRepository;
 	}
 
@@ -40,12 +37,6 @@ public class AppGustoApplication {
 	@Bean
 	public CommandLineRunner run() throws Exception {
 		return (args) -> {
-
-			System.out.println("Adding Configurations....");
-			configurationService.addConfiguration(new Configuration("premio", "800000"));
-
-			System.out.println("\nGetting all configurations....");
-			configurationService.getAllConfigurations().forEach(configuration -> System.out.println(configuration));
 			//userRepository.save(new User("admin@site.org", "admin", Arrays.asList(UserRole.ADMINISTRADOR, UserRole.CLIENTE)));
 		};
 	}

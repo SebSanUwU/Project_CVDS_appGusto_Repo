@@ -24,7 +24,6 @@ public class Comensal extends Usuario {
 
     //constructor
     public Comensal() {
-        super();
         this.numeroPedidos = 0;
         this.metodosDePago = new ArrayList<>();
         this.pedidos = new ArrayList<>();
