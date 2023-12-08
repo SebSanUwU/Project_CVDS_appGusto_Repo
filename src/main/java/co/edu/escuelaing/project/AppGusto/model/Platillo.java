@@ -12,7 +12,7 @@ import java.util.UUID;
 @Table (name = "PLATILLO")
 public class Platillo {
     @Id
-    @Column(name = "ID_RESTAURANTE",length = 100)
+    @Column(name = "ID_PLATILLO",length = 100)
     private Long ID_platillo;
     @ManyToOne
     @JoinColumn(name= "RESTAURANTE")
@@ -47,6 +47,9 @@ public class Platillo {
         this.nombrePlatillo = nombrePlatillo;
     }
 
+    public Platillo() {
+
+    }
 
 
     public void setID_restaurante(Restaurante ID_restaurante) {
