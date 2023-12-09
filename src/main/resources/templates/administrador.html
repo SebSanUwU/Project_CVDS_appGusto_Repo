@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -33,7 +34,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto"> <!-- Utilizando ml-auto para alinear a la derecha -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#" style="color: white;">Mis Restaurantes</a>
+                        <a class="nav-link" href="/administrador/MisRestaurantes" style="color: white;">Mis Restaurantes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/administrador/Estadistica" style="color: white;">Mis Estadísticas</a>
                     </li>
                 </ul>
             </div>
@@ -55,7 +59,7 @@
             Agregar Restaurante
         </button>
 
-        <button type="button" class="btn btn-success"> <!-- Utilizamos la clase btn-success para el color verde claro -->
+        <button type="button" class="btn btn-success" onclick="window.location.href='/administrador/agregarGerente'">
             Agregar Gerente
         </button>
     </div>
@@ -88,7 +92,7 @@
         // Agregar un event listener para el clic en el botón
         btnAgregarRestaurante.addEventListener('click', function() {
             // Redireccionar a la página AgregarRestaurante.html
-            window.location.href = 'AgregarRestaurante.html';
+            window.location.href = '/administrador/agregarRestaurante';
         });
     });
 </script>

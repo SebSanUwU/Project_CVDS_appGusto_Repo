@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "GERENTE_DEL_ADMINISTRADOR")
-public class GerenteDelAdministrador extends User {
+public class GerenteDelAdministrador extends Usuario {
 
 
     @OneToOne
@@ -29,20 +29,25 @@ public class GerenteDelAdministrador extends User {
                                    String correo,
                                    Date fecha, String contrasena) {
 
+        super( nombres,apellidos,username,  correo,  contrasena);
         this.restauranteDelGerente = restaurante;
     }
 
-    public GerenteDelAdministrador(User user, Administrador ID_administrador, Restaurante restaurante) {
-
+    public GerenteDelAdministrador(Usuario usuario, Administrador ID_administrador, Restaurante restaurante) {
+        super(usuario);
+        this.setID_usuario(usuario.getID_usuario());
         this.restauranteDelGerente = restaurante;
     }
 
-
+    public GerenteDelAdministrador(Usuario usuario){
+        super(usuario);
+        this.setID_usuario(null);
+        this.restauranteDelGerente = null;
+    }
 
 
     // setters
     // getters
-
     public Restaurante get_restaurante() {
         return restauranteDelGerente;
     }

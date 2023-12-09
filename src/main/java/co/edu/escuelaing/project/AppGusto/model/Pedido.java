@@ -1,10 +1,13 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
+@Builder
 @Entity
 @Table(name = "PEDIDO")
 public class Pedido {
@@ -19,7 +22,7 @@ public class Pedido {
     @JoinColumn(name = "ID_USUARIO")
     private Comensal id_comensal;
     @ManyToMany(mappedBy = "pedidos")
-    private ArrayList<Platillo> platillos;
+    private List<Platillo> platillos;
 
     @Column(name = "COSTO_TOTAL", length = 20)
     private int costoTotal;
@@ -28,6 +31,15 @@ public class Pedido {
 
     public Pedido(){
 
+    }
+
+    public Pedido(ArrayList<Platillo> carritoDeCompras, String ID_pedido, Comensal id_comensal, List<Platillo> platillos, int costoTotal, boolean disponible) {
+        this.carritoDeCompras = carritoDeCompras;
+        this.ID_pedido = ID_pedido;
+        this.id_comensal = id_comensal;
+        this.platillos = platillos;
+        this.costoTotal = costoTotal;
+        this.disponible = disponible;
     }
 
     public Pedido(Comensal comensal, int costoTotal) {
@@ -58,8 +70,21 @@ public class Pedido {
         this.platillos = platillos;
     }
 
+    public void setCarritoDeCompras(ArrayList<Platillo> carritoDeCompras) {
+        this.carritoDeCompras = carritoDeCompras;
+    }
 
+    public Comensal getId_comensal() {
+        return id_comensal;
+    }
 
+    public void setId_comensal(Comensal id_comensal) {
+        this.id_comensal = id_comensal;
+    }
+
+    public void setPlatillos(List<Platillo> platillos) {
+        this.platillos = platillos;
+    }
 
     public boolean isDisponible() {
         return disponible;
@@ -80,7 +105,7 @@ public class Pedido {
         return costoTotal;
     }
 
-    public ArrayList<Platillo> getPlatillos() {
+    public List<Platillo> getPlatillos() {
         return platillos;
     }
 }
