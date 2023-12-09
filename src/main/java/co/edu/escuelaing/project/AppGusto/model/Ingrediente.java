@@ -1,11 +1,13 @@
 package co.edu.escuelaing.project.AppGusto.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Builder
 @Entity
 @Table(name = "INGREDIENTE")
 public class Ingrediente {
@@ -15,18 +17,28 @@ public class Ingrediente {
     private Long ID_ingrediente;
 
     @ManyToMany(mappedBy = "ingredientes")
-    private List<Platillo> platillos = new ArrayList<Platillo>();
+    private List<Platillo> platillos;
 
     @Column(name = "NOMBRE")
     private String nombre;
     @Column(name = "COSTO")
     private int costo;
 
+    public Ingrediente(Long ID_ingrediente, List<Platillo> platillos, String nombre, int costo) {
+        this.ID_ingrediente = ID_ingrediente;
+        this.platillos = platillos;
+        this.nombre = nombre;
+        this.costo = costo;
+    }
 
     public Ingrediente() {
+        this.platillos= new ArrayList<>();
+        this.nombre = nombre;
+        this.costo = costo;
     }
 
     public Ingrediente(String nombre, int costo) {
+        this.platillos= new ArrayList<>();
         this.nombre = nombre;
         this.costo = costo;
     }

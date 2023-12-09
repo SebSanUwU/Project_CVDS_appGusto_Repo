@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -138,10 +137,9 @@ public class UsuariosService {
 
 
     //Desactive account
-    public void desactiveAdiministrador (Long administradorId){
-        Administrador admin = administradorRepository.findById(administradorId).get();
-        admin.setActivoAdministrador(false);
-        updateAdministrador(admin);
+    public boolean desactiveAdiministrador (Long administradorId){
+        getAdministrador(administradorId).setActivoAdministrador(false);
+        return getAdministrador(administradorId).isActivoAdministrador();
     }
     public void desactiveComensal (Long comensalId){
         Comensal comensal = comensalRepository.findById(comensalId).get();
@@ -160,7 +158,6 @@ public class UsuariosService {
     }
 
 
-
     /**
      * Fill Usuarios - se tiene que especificar que
      * tipo de usario es para poder llenar automaticamente
@@ -170,7 +167,6 @@ public class UsuariosService {
      */
     public void fillUsuarios(String tipoDeUsuario){
         ObjectMapper objectMapper = new ObjectMapper();
-
         try {
             URL url = new URL("https://my.api.mockaroo.com/usuarios.json?key=15cfd9f0");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -191,7 +187,7 @@ public class UsuariosService {
             connection.disconnect();
         } catch (IOException e) {
             System.out.println("ERRROOOOOOOOOOOOOOOOOOOOOOOOOrrrrrrrrr");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 

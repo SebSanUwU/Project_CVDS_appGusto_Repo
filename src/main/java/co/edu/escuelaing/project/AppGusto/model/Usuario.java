@@ -27,27 +27,18 @@ public class Usuario {
     private String apellidos;
     @Column(name = "CORREO", unique = true, nullable = false, length = 70)
     private String correo;
-
     @Column(name = "NUMERO_INICIO_DE_SESION", length = 9)
     private int numero_Inicio_de_sesion;
     @Column(name = "CONTRASENA")
     private String contrasena;
     @Column(name = "ACTIVO", columnDefinition = "BOOLEAN")
     private boolean activo;
-
-
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(
-//            name = "users_roles",
-//            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID_usuario")},
-//            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")})
-//    private List<Role> roles = new ArrayList<>();
-
     @Column(name = "roles", nullable=false)
     private List<UserRole> roles;
 
 
     //Constructors
+
     public Usuario() {
     }
     public Usuario(Usuario usuario) {
@@ -76,49 +67,6 @@ public class Usuario {
         this.activo = true;
     }
 
-    //Methods
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return List.of(new SimpleGrantedAuthority(("USER")));
-//    }
-//
-//    @Override
-//    public String getPassword() {
-//        return this.contrasena;
-//    }
-//
-//    @Override
-//    public String getUsername() {
-//        return this.nombre;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return true;
-//    }
-
-
-    //Setters
-
-
-//    public void setSessions(ArrayList<Session> sessions) {
-//        this.sessions = sessions;
-//    }
 
     public void setRoles(List<UserRole> roles) {
         this.roles = roles;
@@ -158,13 +106,6 @@ public class Usuario {
     }
 
 
-    //Getters
-
-
-//    public ArrayList<Session> getSessions() {
-//        return sessions;
-//    }
-
     public String getContrasena() {
         return contrasena;
     }
@@ -198,4 +139,18 @@ public class Usuario {
         return numero_Inicio_de_sesion;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "ID_usuario=" + ID_usuario +
+                ", username='" + username + '\'' +
+                ", nombres='" + nombres + '\'' +
+                ", apellidos='" + apellidos + '\'' +
+                ", correo='" + correo + '\'' +
+                ", numero_Inicio_de_sesion=" + numero_Inicio_de_sesion +
+                ", contrasena='" + contrasena + '\'' +
+                ", activo=" + activo +
+                ", roles=" + roles +
+                '}';
+    }
 }

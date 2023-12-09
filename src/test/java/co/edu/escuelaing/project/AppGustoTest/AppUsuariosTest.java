@@ -16,7 +16,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.mockito.BDDMockito.given;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.willDoNothing;
@@ -24,7 +23,7 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class AppGustoTest {
+public class AppUsuariosTest {
     @InjectMocks
     UsuariosService usuariosService;
 
@@ -34,6 +33,11 @@ public class AppGustoTest {
     GerenteRepository gerenteRepository;
     @Mock
     ComensalRepository comensalRepository;
+    @Mock
+    UsuarioRepository usuarioRepository;
+
+
+
 
 
     private Usuario usuario;
@@ -138,9 +142,11 @@ public class AppGustoTest {
         assertThat(queryComensal).isNull();
     }
 
+
     @DisplayName("Eliminar a un usuario registrado")
     @Test
-    public void EliminarUsuarioEnDB_thenReturnUserObject(){
+    public void DesactivarUsuario_thenRetunrNan(){
+
         // given - precondition or setup
         willDoNothing().given(administradorRepository).deleteById(usuario.getID_usuario());
         willDoNothing().given(comensalRepository).deleteById(usuario.getID_usuario());
@@ -154,6 +160,32 @@ public class AppGustoTest {
         verify(gerenteRepository,times(1)).deleteById(usuario.getID_usuario());
         verify(comensalRepository,times(1)).deleteById(usuario.getID_usuario());
     }
+
+    @DisplayName("Consulta por correo a un usuario")
+    @Test
+    public void ConsultaDeUsuarioCorreo_thenReturnUsuario(){
+        // given - precondition or setup
+        usuarioRepository.save(usuario);
+        // when -  action or the behaviour that we are going test
+        when(usuariosService.findByCorreo(usuario.getCorreo())).thenReturn(usuario);
+        // then - verify the output
+        Usuario usuarioTest = usuariosService.findByCorreo(usuario.getCorreo());
+        assertThat(usuarioTest).isNotNull();
+    }
+
+    @DisplayName("Consulta por correo a un usuario no registrado")
+    @Test
+    public void ConsultaDeUsuarioCorreoNoDB_thenReturnUsuario(){
+        // given - precondition or setup
+
+        // when -  action or the behaviour that we are going test
+        when(usuariosService.findByCorreo(usuario.getCorreo())).thenReturn(null);
+        // then - verify the output
+        Usuario usuarioTest = usuariosService.findByCorreo(usuario.getCorreo());
+        assertThat(usuarioTest).isNull();
+    }
+
+
 
 
 }

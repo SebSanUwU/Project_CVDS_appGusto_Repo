@@ -1,7 +1,10 @@
 package co.edu.escuelaing.project.AppGusto.model;
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.UUID;
+
+@Builder
 @Entity
 @Table(name = "METADO_DE_PAGO")
 public class MetodoDePago {
@@ -16,6 +19,11 @@ public class MetodoDePago {
 
     }
 
+    public MetodoDePago(Comensal comensal, String ID_metodoPago) {
+        this.comensal = comensal;
+        this.ID_metodoPago = ID_metodoPago;
+    }
+
     public MetodoDePago(Comensal comensal) {
         UUID uuid = UUID.randomUUID();
         this.ID_metodoPago = uuid.toString();
@@ -28,5 +36,13 @@ public class MetodoDePago {
 
     public String getID_metodoPago() {
         return ID_metodoPago;
+    }
+
+    public void setComensal(Comensal comensal) {
+        this.comensal = comensal;
+    }
+
+    public void setID_metodoPago(String ID_metodoPago) {
+        this.ID_metodoPago = ID_metodoPago;
     }
 }
