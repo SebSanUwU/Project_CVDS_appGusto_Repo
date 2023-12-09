@@ -1,8 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -23,6 +20,7 @@
 </head>
 <body style="background-color: #FFEDDE;">
 <div class="container-fluid p-3 mb-2 text-white" style="background-color: #FE043C;">
+    <div class="p-2 text-white text-center h5" th:text="${username}"> </div>
     <div class="p-2 text-white text-center h3">Mis restaurantes</div>
 </div>
 <div class="container-fluid mt-5">

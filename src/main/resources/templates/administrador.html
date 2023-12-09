@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -23,6 +24,7 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <a class="navbar-brand" href="#" style="color: white;" th:text="${username} "></a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
@@ -69,11 +71,11 @@
 
     <!-- Botones -->
     <div class="text-center mt-4">
-        <button id="btnAgregarRestaurante" type="button" class="btn btn-danger mr-2">
+        <button  id="btnAgregarRestaurante" type="button" class="btn btn-danger mr-2">
             Agregar Restaurante
         </button>
 
-        <button type="button" class="btn btn-success" onclick="window.location.href='/administrador/agregarGerente'">
+        <button type="button" class="btn btn-success" onclick=" window.location.href='/administrador/agregarGerente'">
             Agregar Gerente
         </button>
     </div>
@@ -101,9 +103,19 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const btnAgregarRestaurante = document.getElementById('btnAgregarRestaurante');
-        btnAgregarRestaurante.addEventListener('click', function() {
-            window.location.href = '/administrador/agregarRestaurante';
-        });
+        var parametro = "[[${username}]]";
+        console.log("pasooooooooooooooooooooooooooooo")
+        console.log(parametro);
+
+        if (parametro !== undefined && parametro !== null) {
+            // Agregar un event listener para el clic en el botón
+            btnAgregarRestaurante.addEventListener('click', function() {
+                // Redireccionar a la página AgregarRestaurante.html
+                window.location.href = '/administrador/agregarRestaurante?parametro=' + encodeURIComponent(parametro);
+            });
+        } else {
+            console.error("El valor de username es indefinido o nulo.");
+        }
     });
 </script>
 </html>
