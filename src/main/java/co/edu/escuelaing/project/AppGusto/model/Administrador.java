@@ -29,20 +29,20 @@ public class Administrador extends Usuario {
         this.setActivoAdministrador(true);
     }
 
-    public Administrador(int numero_Restaurantes, List<Restaurante> restaurantes, boolean activoAdministrador) {
+    public Administrador(int numero_Restaurantes, ArrayList<Restaurante> restaurantes, boolean activoAdministrador) {
         this.numero_Restaurantes = numero_Restaurantes;
         this.restaurantes = restaurantes;
         this.activoAdministrador = activoAdministrador;
     }
 
-    public Administrador(Usuario usuario, int numero_Restaurantes, List<Restaurante> restaurantes, boolean activoAdministrador) {
+    public Administrador(Usuario usuario, int numero_Restaurantes, ArrayList<Restaurante> restaurantes, boolean activoAdministrador) {
         super(usuario);
         this.numero_Restaurantes = numero_Restaurantes;
         this.restaurantes = restaurantes;
         this.activoAdministrador = activoAdministrador;
     }
 
-    public Administrador(String nombres, String apellidos, String username, String correo, String contrasena, int numero_Restaurantes, List<Restaurante> restaurantes, boolean activoAdministrador) {
+    public Administrador(String nombres, String apellidos, String username, String correo, String contrasena, int numero_Restaurantes, ArrayList<Restaurante> restaurantes, boolean activoAdministrador) {
         super(nombres, apellidos, username, correo, contrasena);
         this.numero_Restaurantes = numero_Restaurantes;
         this.restaurantes = restaurantes;
@@ -94,7 +94,6 @@ public class Administrador extends Usuario {
     public String toString() {
         return super.toString()+"Administrador{" +
                 "numero_Restaurantes=" + numero_Restaurantes +
-                ", restaurantes=" + restaurantes +
                 ", activoAdministrador=" + activoAdministrador +
                 '}';
     }
