@@ -1,9 +1,6 @@
 package co.edu.escuelaing.project.AppGusto.service;
 
-import co.edu.escuelaing.project.AppGusto.model.Administrador;
-import co.edu.escuelaing.project.AppGusto.model.Comensal;
-import co.edu.escuelaing.project.AppGusto.model.GerenteDelAdministrador;
-import co.edu.escuelaing.project.AppGusto.model.Usuario;
+import co.edu.escuelaing.project.AppGusto.model.*;
 import co.edu.escuelaing.project.AppGusto.repository.AdministradorRepository;
 import co.edu.escuelaing.project.AppGusto.repository.ComensalRepository;
 import co.edu.escuelaing.project.AppGusto.repository.GerenteRepository;
@@ -21,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -44,6 +42,18 @@ public class UsuariosService {
         this.usuarioRepository = usuarioRepository;
 
     }
+//    public void ayuda(){
+//        Usuario usuario = new Usuario("Jose Juaquin",
+//                "Martines", "o_o", "1@1.com", "123");
+//        Usuario usuario1 = new Usuario("Jose Juaquin",
+//                "Martines", "soy comensal", "2@2.com", "123");
+//        Administrador administrador = new Administrador(usuario);
+//        Comensal comensal = new Comensal(usuario1);
+//        administrador.setRoles(Arrays.asList(UserRole.ADMINISTRADOR));
+//        comensal.setRoles(Arrays.asList(UserRole.COMENSAL));
+//        this.addComensal(comensal);
+//        this.addAdministrador(administrador);
+//    }
 
     public static String encodePassword(String plainPassword) {
         try {

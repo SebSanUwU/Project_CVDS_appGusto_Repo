@@ -36,7 +36,7 @@
     <div class="text-center">
         <h1 class="mt-5">Crea tu nuevo Gerente</h1>
         <div class="box mt-5">
-            <form action="/" class="form-group" method="post">
+            <form th:action="@{/administrador/agregarGerente}" class="form-group" method="post">
                 <label for="restaurante">Restaurante Designado:</label><br>
                 <input class="form-control" type="text" id="restaurante" name="restaurante" required><br>
                 <label for="nombres">Nombre del Gerente:</label><br>

@@ -1,10 +1,12 @@
 package co.edu.escuelaing.project.AppGusto;
 
 import co.edu.escuelaing.project.AppGusto.AppGustoApplication;
-import co.edu.escuelaing.project.AppGusto.model.Configuration;
-import co.edu.escuelaing.project.AppGusto.model.Restaurante;
+import co.edu.escuelaing.project.AppGusto.controller.AdministradorController;
+import co.edu.escuelaing.project.AppGusto.controller.ComensalController;
+import co.edu.escuelaing.project.AppGusto.model.*;
 import co.edu.escuelaing.project.AppGusto.repository.UsuarioRepository;
 import co.edu.escuelaing.project.AppGusto.service.ConfigurationService;
+import co.edu.escuelaing.project.AppGusto.service.UsuariosService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import lombok.extern.slf4j.Slf4j;
@@ -40,6 +42,4 @@ public class AppGustoApplication {
 			//userRepository.save(new User("admin@site.org", "admin", Arrays.asList(UserRole.ADMINISTRADOR, UserRole.CLIENTE)));
 		};
 	}
-
-
 }

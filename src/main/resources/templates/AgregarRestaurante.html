@@ -116,7 +116,10 @@
         <div class="text-center">
             <h1 class="mt-5" style="color: #6C3483;">Crea tu Restaurante</h1>
             <div class="box mt-5">
-                <form action="/" class="form-group" method="post">
+                <form method="post"
+                      class="form-group"
+                      th:action="@{/administrador/agregarRestaurante}"
+                      th:object="${restaurante}">>
                     <label for="nombre">Nombre del Restaurante:</label><br>
                     <input class="form-control" type="text" id="nombre" name="nombre" required><br>
 
@@ -143,6 +146,7 @@
                         <option value="Si">Si</option>
                         <option value="No">No</option>
                     </select>
+                    <input type="hidden" name="token" id ="inputToken" th:value="${token}">
 
                     <input class="btn btn-primary mt-4" type="submit" value="Crear">
                 </form>
@@ -167,4 +171,32 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Obtener el token
+        var tokenActual = obtenerToken();
+
+        // Establecer el token en el campo oculto del formulario
+        document.getElementById('inputToken').value = tokenActual;
+    });
+
+    function obtenerToken() {
+        // Obtener todas las cookies de la página
+        var cookies = document.cookie.split(';');
+
+        // Buscar la cookie que almacena el token (ajusta el nombre de la cookie según tu implementación)
+        var nombreCookieToken = "authToken";
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.indexOf(nombreCookieToken + '=') === 0) {
+                // Obtener el valor del token
+                var token = cookie.substring(nombreCookieToken.length + 1);
+                return token;
+            }
+        }
+
+        return null;
+    }
+</script>
+
 </html>

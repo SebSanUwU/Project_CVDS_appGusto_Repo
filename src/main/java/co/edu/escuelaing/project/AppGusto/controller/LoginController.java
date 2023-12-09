@@ -6,6 +6,7 @@ import co.edu.escuelaing.project.AppGusto.repository.UsuarioRepository;
 import co.edu.escuelaing.project.AppGusto.service.UsuariosService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,16 +37,16 @@ public class LoginController {
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
         this.usuariosServices = usuariosService;
-
     }
 
     @GetMapping("")
     public String login() {
+
         return LOGIN_PAGE;
     }
 
     @PostMapping("")
-    public String loginSubmit(@RequestParam Map<String, String> parameters, Model model, HttpServletResponse response) {
+    public String loginSubmit(@RequestParam Map<String, String> parameters, Model model, HttpServletResponse response, HttpSession sesion) {
         Usuario user = userRepository.findByCorreo(parameters.get("email"));
         if (user == null) {
             model.addAttribute("errors", Arrays.asList("Usuario no encontrado"));
@@ -61,13 +62,12 @@ public class LoginController {
             cookie.setHttpOnly(true);
             response.addCookie(cookie);
             Usuario whois = usuariosServices.findByCorreo(parameters.get("email"));
-            if(whois instanceof Administrador){
-                return "redirect:/administrador/home";
-            }
-            else if (whois instanceof Comensal) {
-                return "redirect:/comensal/home";
-            }
-            return "redirect:/login/protected/example";
+
+            sesion.setAttribute("username", whois.getUsername());
+            String direccion = whois instanceof Administrador ? "redirect:/administrador/home": "redirect:/comensal/home";
+            if (whois instanceof GerenteDelAdministrador) direccion = "redirect:/gerente/home";
+            return direccion;
+
         }
     }
 
@@ -84,6 +84,7 @@ public class LoginController {
 
     @GetMapping("register")
     public String register(Model model) {
+        //usuariosServices.ayuda();
         model.addAttribute("usuario", new Usuario());
         return "login/register";
     }
@@ -111,17 +112,14 @@ public class LoginController {
              usuariosServices.addAdministrador(administrador);
          }
          if(tipoUsuario.equals("comensal")){
-
              Comensal comensal= new Comensal(usuario);
              comensal.setRoles(Arrays.asList(UserRole.COMENSAL));
              usuariosServices.addComensal(comensal);
          }
         return "redirect:/login";
      }
-
     @GetMapping("protected/example")
     public String protectedExample() {
         return "login/protected";
     }
-
 }
