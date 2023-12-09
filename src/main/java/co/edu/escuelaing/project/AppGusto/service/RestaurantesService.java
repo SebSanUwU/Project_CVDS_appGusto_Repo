@@ -112,9 +112,8 @@ public class RestaurantesService {
             connection.disconnect();
         } catch (IOException e) {
             System.out.println("ERRROOOOOOOOOOOOOOOOOOOOOOOOOrrrrrrrrr");
-            e.printStackTrace();
+            //e.printStackTrace();
 
         }
-
     }
 }

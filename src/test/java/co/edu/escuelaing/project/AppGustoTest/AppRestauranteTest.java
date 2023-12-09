@@ -114,7 +114,7 @@ public class AppRestauranteTest {
 
     @DisplayName("Crear un restaurante no Registrado")
     @Test
-    public void crearRestauranteNoRegistrado(){
+    public void crearRestauranteNoRegistrado_thenReturnRestaurante(){
         // given - precondition or setup
         given(restauranteRepository.save(restaurante)).willReturn(restaurante);
         // when -  action or the behaviour that we are going test

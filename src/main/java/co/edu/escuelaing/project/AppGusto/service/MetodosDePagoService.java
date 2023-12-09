@@ -22,8 +22,8 @@ public class MetodosDePagoService {
         return metodoDePagoRepository.save(metodoDePago);
     }
     //Get for ID
-    public MetodoDePago getMetodoDePago(Long metodoDePagoID){
-        return metodoDePagoRepository.getReferenceById(metodoDePagoID);
+    public MetodoDePago getMetodoDePago(String metodoDePagoID){
+        return metodoDePagoRepository.getReferenceById(Long.valueOf(metodoDePagoID));
     }
     //Get All
     public List<MetodoDePago> getAllMetodosDePagos(){
@@ -34,7 +34,7 @@ public class MetodosDePagoService {
         return metodoDePagoRepository.save(metodoDePago);
     }
     //Delete
-    public void deleteMetodoDePago(Long metodoDePagoId) {
+    public void deleteMetodoDePago(String metodoDePagoId) {
         metodoDePagoRepository.deleteById(Long.valueOf(metodoDePagoId));
     }
     //fill

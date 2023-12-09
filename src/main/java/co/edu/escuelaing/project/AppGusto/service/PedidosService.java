@@ -21,8 +21,8 @@ public class PedidosService {
         return pedidoRepository.save(pedido);
     }
     //Get for ID
-    public Pedido getPedido(Long pedidoID){
-        return pedidoRepository.getReferenceById(pedidoID);
+    public Pedido getPedido(String pedidoID){
+        return pedidoRepository.getReferenceById(Long.valueOf(pedidoID));
     }
     //Get All
     public List<Pedido> getAllPedidos(){
@@ -33,7 +33,7 @@ public class PedidosService {
         return pedidoRepository.save(pedido);
     }
     //Delete
-    public void deletePedido(Long pedidoId) {
+    public void deletePedido(String pedidoId) {
         pedidoRepository.deleteById(Long.valueOf(pedidoId));
     }
     //fill
