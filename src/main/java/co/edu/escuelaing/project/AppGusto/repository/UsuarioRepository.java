@@ -11,8 +11,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
-    @Transactional
-    Optional<Usuario> findByUsername(String username);
+
+    Usuario findByUsername(String username);
 
     Usuario findByCorreo(String correo);
 }
