@@ -43,7 +43,11 @@ public class AdministradorController {
         return "AgregarRestaurante";
     }
     @PostMapping("/agregarRestaurante")
-    public String postAgregarRestaurante(@ModelAttribute("restaurante") Restaurante restaurante, @RequestParam("token") String token, Model model){
+    public String postAgregarRestaurante(@ModelAttribute("restaurante") Restaurante restaurante,
+                                         @RequestParam("token") String token,
+                                         @RequestParam("username") String username,
+                                         Model model){
+
         restaurantesService.addRestaurante(restaurante);
         return "administrador";
     }
