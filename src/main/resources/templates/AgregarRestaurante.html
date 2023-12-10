@@ -123,26 +123,73 @@
                 <form method="post"
                       class="form-group"
                       th:action="@{/administrador/agregarRestaurante}"
-                      th:object="${restaurante}">>
-                    <label for="nombre">Nombre del Restaurante:</label><br>
-                    <input class="form-control" type="text" id="nombre" name="nombre" required><br>
+                      th:object="${restaurante}">
 
-                    <label for="nombreMarca">Nombre de la marca:</label><br>
-                    <input class="form-control" type="text" id="nombreMarca" name="nombreMarca" required><br>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input
+                                class="form-control"
+                                id="nombre de la marca"
+                                name="nombreMarca"
+                                placeholder="Pon un Username"
+                                th:field="*{nombreMarca}"
+                                type="text"
+                        />
+                        <p th:errors = "*{nombreMarca}" class="text-danger"
+                           th:if="${#fields.hasErrors('nombreMarca')}"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Nombre Legal</label>
+                        <input
+                                class="form-control"
+                                id="nombre legal"
+                                name="nombreMarca"
+                                placeholder="Pon un Username"
+                                th:field="*{nombreLegal}"
+                                type="text"
+                        />
+                        <p th:errors = "*{nombreLegal}" class="text-danger"
+                           th:if="${#fields.hasErrors('nombreLegal')}"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Dirección</label>
+                        <input
+                                class="form-control"
+                                id="direccion"
+                                name="direccion"
+                                placeholder="Pon un Username"
+                                th:field="*{direccion}"
+                                type="text"
+                        />
+                        <p th:errors = "*{direccion}" class="text-danger"
+                           th:if="${#fields.hasErrors('direccion')}"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Categoría de Restaurante</label>
+                        <select class="form-control" id="Categoria" name="nombreMarca" th:field="*{categoria}">
+                            <option value="" disabled selected>Selecciona una categoría</option>
+                            <option value="mexicano">Mexicano</option>
+                            <option value="frances">Francés</option>
+                            <option value="típico">Típico</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                        <p th:errors="*{categoria}" class="text-danger" th:if="${#fields.hasErrors('categoria')}"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">NIT</label>
+                        <input
+                                class="form-control"
+                                id="nit"
+                                name="nit"
+                                placeholder="Pon un Username"
+                                th:field="*{documentos}"
+                                type="text"
+                        />
+                        <p th:errors = "*{documentos}" class="text-danger"
+                           th:if="${#fields.hasErrors('documentos')}"></p>
+                    </div>
 
-                    <label for="nombreLegal">Nombre legal del Restaurante:</label><br>
-                    <input class="form-control" type="text" id="nombreLegal" name="nombreLegal" required><br>
-
-                    <label for="calificacion">Calificación de tu Restaurante:</label><br>
-                    <input class="form-control" type="text" id="calificacion" name="calificacion">
-
-                    <label for="direccion">Dirección del Restaurante:</label><br>
-                    <input class="form-control col-8 mx-auto" type="text" id="direccion" name="direccion" required><br>
-
-
-                    <label for="nit">NIT del Restaurante:</label><br>
-                    <input class="form-control col-8 mx-auto" type="text" id="nit" name="nit" required><br>
-                    <input type="hidden" name="token" id ="inputToken" th:value="${token}">
+                    <input type="hidden" name="token" id ="inputToken">
                     <input type="hidden" name="username" id ="username" th:value="${username}">
 
                     <input class="btn btn-primary mt-4" type="submit" value="Crear">
@@ -169,30 +216,36 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Obtener el token
-        var tokenActual = obtenerToken();
+        // No es necesario obtener el token aquí, se hará cuando se haga clic en el botón.
+        // var tokenActual = obtenerToken();
 
-        // Establecer el token en el campo oculto del formulario
-        document.getElementById('inputToken').value = tokenActual;
+        // Asignar el evento al botón "Crear"
+        var btnCrear = document.querySelector('.btn.btn-primary');
+        if (btnCrear) {
+            btnCrear.addEventListener('click', function() {
+                var tokenActual = obtenerToken();
+                document.getElementById('inputToken').value = tokenActual;
+            });
+        }
     });
 
     function obtenerToken() {
-        // Obtener todas las cookies de la página
         var cookies = document.cookie.split(';');
-
-        // Buscar la cookie que almacena el token (ajusta el nombre de la cookie según tu implementación)
         var nombreCookieToken = "authToken";
-        for (var i = 0; i < cookies.length; i++) {
+        console.log(cookies);
+        console.log(cookies.length);
+        console.log(document.cookie)
+        for (var i = 0; i <= cookies.length; i++) {
             var cookie = cookies[i].trim();
-            if (cookie.indexOf(nombreCookieToken + '=') === 0) {
-                // Obtener el valor del token
-                var token = cookie.substring(nombreCookieToken.length + 1);
-                return token;
+            console.log("pasoooooooooo");
+            console.log(cookie);
+            if (cookie.indexOf(nombreCookieToken) === 0) {
+                return cookie.substring(nombreCookieToken.length);
             }
         }
-
-        return null;
+        return "0";
     }
+
 </script>
 
 </html>

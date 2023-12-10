@@ -102,6 +102,11 @@ public class UsuariosService {
         return gerenteRepository.getReferenceById(gerenteID);
     }
 
+    // Get for username
+    public Usuario getAdministrador(String username){
+        return usuarioRepository.findByUsername(username);
+    }
+
     //Get All
     public List<Administrador> getAllAdministradores(){
         return administradorRepository.findAll();
