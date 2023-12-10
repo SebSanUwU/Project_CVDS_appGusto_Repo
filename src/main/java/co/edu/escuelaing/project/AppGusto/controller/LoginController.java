@@ -71,7 +71,7 @@ public class LoginController {
         }
     }
 
-    @PostMapping("logout")
+    @GetMapping("logout")
     public String logoutSubmit(HttpServletResponse response) {
         Cookie cookie = new Cookie("authToken", null);
         cookie.setMaxAge(0);
