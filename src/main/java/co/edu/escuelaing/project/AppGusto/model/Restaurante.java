@@ -13,12 +13,12 @@ import java.util.UUID;
 public class Restaurante {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_RESTAURANTE",length = 100)
     private Long ID_restaurante;
     @Enumerated(EnumType.STRING)
     @Column(name = "CATEGORIA")
     private CategoriaEnum categoria;
-
 
     @ManyToOne
     @JoinColumn(name="ID_administrador")
