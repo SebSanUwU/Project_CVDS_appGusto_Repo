@@ -33,8 +33,8 @@ public class Ingrediente {
 
     public Ingrediente() {
         this.platillos= new ArrayList<>();
-        this.nombre = nombre;
-        this.costo = costo;
+        this.nombre = null;
+        this.costo = 0;
     }
 
     public Ingrediente(String nombre, int costo) {
